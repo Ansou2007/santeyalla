@@ -16,6 +16,7 @@
                     <th>Telephone</th>
                     <th>Role</th>
                     <th>Status</th>
+                    <th>Password</th>
                     <th class="text-center">Action</th>
                     </tr>
                     </thead>
@@ -38,6 +39,7 @@
                         
                         @endif                            
                      </td>
+                     <td><a href="" class="btn btn-warning">reinistialiser</a></td>
                     <td class="text-center">
                         <a href="" class="btn btn-link"><i class="fas fa-edit"></i></a>
                         <button class="btn btn-link" id="supprimer"><i class="fas fa-trash"></i></button>

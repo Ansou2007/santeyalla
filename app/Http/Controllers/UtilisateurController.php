@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Structure;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -18,14 +19,15 @@ class UtilisateurController extends Controller
 
     public function create()
     {
-
-        return view('utilisateur.ajout');
+        $structure = Structure::all();
+        return view('utilisateur.ajout', compact('structure'));
     }
     // Enregistrement
     public function store(Request $request, User $user)
     {
         $request->validate([
             "prenom" => "required",
+            "structure_id" => "required",
             "nom" => "required",
             "email" => "required|unique:users,email",
             "telephone" => "required|numeric",
@@ -33,6 +35,7 @@ class UtilisateurController extends Controller
         ]);
         $user->create([
             "prenom" => $request->prenom,
+            "structure_id" => $request->structure_id,
             "nom" => $request->nom,
             "email" => $request->email,
             "telephone" => $request->telephone,

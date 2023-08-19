@@ -11,26 +11,52 @@
     </div>
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
+    <label>Boulangerie <span class="login-danger">*</span></label>
+    <select class="form-control @error('structure_id') is-invalid @enderror" id="" name="structure_id">
+        <option value="" selected disabled>Selectionner</option>
+        @foreach ($structure as $structure )
+            <option value="{{$structure->id}}">{{$structure->nom_complet}}</option>
+        @endforeach
+    </select>
+    @error('structure_id')
+        <span class="text-danger">{{$message}}</span>
+    @enderror
+    </div>
+    </div>
+    <div class="col-12 col-sm-6">
+    <div class="form-group local-forms">
     <label>Prenom <span class="login-danger">*</span></label>
     <input class="form-control @error('prenom') is-invalid @enderror" type="text" placeholder="prenom" name="prenom">
+    @error('prenom')
+        <span class="text-danger">{{$message}}</span>
+    @enderror
     </div>
     </div>
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
     <label>Nom <span class="login-danger">*</span></label>
     <input class="form-control @error('nom') is-invalid @enderror" type="text" placeholder="nom" name="nom">
+    @error('nom')
+        <span class="text-danger">{{$message}}</span>
+    @enderror
     </div>
     </div>
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
     <label>Email <span class="login-danger">*</span></label>
     <input class="form-control @error('email') is-invalid @enderror" type="email" placeholder="email" name="email">
+    @error('email')
+        <span class="text-danger">{{$message}}</span>
+    @enderror
     </div>
     </div>
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
     <label>Telephone </label>
     <input class="form-control @error('telephone') is-invalid @enderror" type="number" placeholder="telephone" name="telephone">
+    @error('telephone')
+        <span class="text-danger">{{$message}}</span>
+    @enderror
     </div>
     </div>
     <div class="col-12 col-sm-6">
@@ -81,14 +107,13 @@
     </form>
     </div>
     </div>
+    
      @if (session()->has('Message'))
      <script>
         $(document).ready(function(){
 
             Swal.fire('Message',"{{session()->get('Message')}}",'info');
-            //alert('utilisateur ajouté avec success');
         })
-        
     </script>
 @endif
 

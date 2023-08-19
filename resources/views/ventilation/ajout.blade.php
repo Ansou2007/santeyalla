@@ -91,7 +91,7 @@
     <div class="col-12 col-sm-6">
         <div class="form-group local-forms">
             <label for="exampleInputEmail1">Montant A Versé</label>
-            <input type="hidden" class="form-control @error('montant_a_verse') is-invalid @enderror" name="montant_a_verse" id="montant_a_verser" disabled>
+            <input type="hidden" class="form-control @error('montant_a_verse') is-invalid @enderror" name="montant_a_verse" id="montant_a_verser">
             @error('montant_a_verse')
             <span class="text-danger">{{$message}}</span>
         @enderror
@@ -106,15 +106,13 @@
     @enderror
     </div>
     </div>
-
-    
-
-       
-    
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
         <label for="">Reliquat</label>
-        <input type="hidden" class="form-control @error('reliquat') is-invalid @enderror"   name="reliquat" id="reliquat" disabled>
+        <input type="hidden" class="form-control @error('reliquat') is-invalid @enderror"   name="reliquat" id="reliquat">
+        @error('reliquat')
+        <span class="text-danger">{{$message}}</span>
+    @enderror
     </div>
     </div>
     <div class="col-12">
@@ -182,7 +180,7 @@
 
         })
     </script>
-    @if (session()->has('Message'))
+    @if(session()->has('Message'))
     <script>
         $(document).ready(function(e){
             Swal.fire('Ventilation',"{{session()->get('Message')}}",'info');
