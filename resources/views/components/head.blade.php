@@ -3,10 +3,10 @@
 
     <div class="header-left">
     <a href="{{route('dashboard')}}" class="logo">
-    <img src="{{asset('img/logo_santeyalla.jpeg')}}" alt="Logo">
+    <img src="{{asset('img/logo_santeyalla.jpeg')}}" style="border-radius: 50%" alt="Logo">
     </a>
     <a href="{{route('dashboard')}}" class="logo logo-small">
-    <img src="{{asset('img/logo_santeyalla.jpeg')}}" alt="Logo" width="30" height="30">
+    <img src="{{asset('img/logo_santeyalla.jpeg')}}" alt="Logo" style="border-radius: 50%" width="30" height="30">
     </a>
     </div>
     <div class="menu-toggle">
