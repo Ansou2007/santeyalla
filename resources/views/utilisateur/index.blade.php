@@ -42,7 +42,12 @@
                      <td><a href="" class="btn btn-warning">reinistialiser</a></td>
                     <td class="text-center">
                         <a href="" class="btn btn-link"><i class="fas fa-edit"></i></a>
-                        <button class="btn btn-link" id="supprimer"><i class="fas fa-trash"></i></button>
+                        {{-- <a href="{{route('Utilisateur.supprimer',['utilisateur'=>$utilisateur->id])}}" class="btn btn-link" id="supprimer"><i class="fas fa-trash"></i></a> --}}
+                        <form action="{{route('Utilisateur.supprimer',['utilisateur'=>$utilisateur->id])}}" method="post">
+                            @method('delete')
+                            @csrf
+                            <button type="submit"><i class="fas fa-trash"></i></button>
+                        </form>
                     </td>
                     </tr> 
                     @endforeach
@@ -55,6 +60,10 @@
         <script>
             $(document).ready(function(){
                 $('#utilisateur').DataTable();
+
+                @if (session()->has('Message'))
+                    Swal.fire('Utilisateur',"{{session()->get('Message')}}",'info');
+                @endif
            /*      
                 const Toast = Swal.mixin({
                 toast: true,

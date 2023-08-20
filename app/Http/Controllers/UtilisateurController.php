@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Stmt\TryCatch;
 
 class UtilisateurController extends Controller
 {
@@ -55,8 +56,12 @@ class UtilisateurController extends Controller
     {
     }
 
-    public function delete()
+    public function delete(User $user)
     {
+
+        $user->delete();
+        //dd($user);
+        return back()->with('Message', "Utilisateur supprimé");
     }
 
     // Profil Utilisateur
@@ -67,6 +72,7 @@ class UtilisateurController extends Controller
         return view('utilisateur.profil', compact('profil'));
     }
 
+    // Mise a jour profil
     public function profile_update(Request $request)
     {
         $id = Auth()->user()->id;

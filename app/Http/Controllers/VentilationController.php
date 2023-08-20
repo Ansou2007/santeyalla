@@ -107,16 +107,16 @@ class VentilationController extends Controller
     public function filtre(Request $request)
     {
         $date_debut = $request->date_debut;
-        $date_fin = $request->date_debut;
+        $date_fin = $request->date_fin;
         $ventilation = Ventilation::whereBetween('date_ventilation', [$date_debut, $date_fin])->get();
         return view('ventilation.filtre', compact('ventilation'));
     }
-    public function filtre_search(Request $request)
+    /*  public function filtre_search(Request $request)
     {
 
         $date_debut = $request->date_debut;
-        $date_fin = $request->date_debut;
+        $date_fin = $request->date_fin;
         $ventilation = Ventilation::whereBetween('date_ventilation', [$date_debut, $date_fin])->get();
         return view('ventilation.filtre', compact('ventilation'));
-    }
+    } */
 }

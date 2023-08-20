@@ -13,16 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 
 /** Side-Bar menu active */
 /* function set_active($route)
@@ -66,7 +57,7 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::get('ventilation/edition/{ventilation}', [VentilationController::class, 'edit'])->name('Ventilation.edition');
     Route::put('ventilation/detail/{ventilation}', [VentilationController::class, 'update'])->name('Ventilation.update');
     Route::delete('ventilation/{ventilation}', [VentilationController::class, 'delete'])->name('Ventilation.delete');
-    Route::get('ventilation/filtre', [VentilationController::class, 'filtre'])->name("Ventilation.filtre");
+    Route::post('ventilation/filtre', [VentilationController::class, 'filtre'])->name("Ventilation.filtre");
     /*     Route::get('ventilation/filtre', [VentilationController::class, 'filtre_search'])->name("Ventilation.filtre");
  */    // Livreur
     Route::get('livreur', [LivreurController::class, 'index'])->name('Livreur.index');
@@ -79,6 +70,7 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::get('utilisateur', [UtilisateurController::class, 'index'])->name('Utilisateur.index');
     Route::get('utilisateur/ajout', [UtilisateurController::class, 'create'])->name('Utilisateur.ajout');
     Route::post('utilisateur/ajout', [UtilisateurController::class, 'store'])->name('Utilisateur.ajouter');
+    Route::delete('utilisateur/{utilisateur}', [UtilisateurController::class, 'delete'])->name('Utilisateur.supprimer');
     // Employe
     Route::get('employe', [EmployeController::class, 'index'])->name('Employe.index');
     Route::get('employe/ajout', [EmployeController::class, 'create'])->name('Employe.ajout');

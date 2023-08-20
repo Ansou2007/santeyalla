@@ -14,7 +14,9 @@
     <div class="form-group local-forms">
         <label for="">structure</label>
                     <select class="form-control @error('structure_id') is-invalid @enderror" name="structure_id" >
-                        <option value="{{$livreur->structures->id}}">{{$livreur->structures->nom_complet}}</option>
+                        @foreach ($structure as $boulangerie)
+                        <option value="{{$boulangerie->id}}"  {{$livreur->structure_id === $boulangerie->id ? 'selected' : ''}} >{{$boulangerie->nom_complet}}</option>
+                        @endforeach
                     </select>
             @error('structure_id')
             <span class="text-danger">{{$message}}</span>

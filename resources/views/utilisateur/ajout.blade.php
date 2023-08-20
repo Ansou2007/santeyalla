@@ -111,7 +111,6 @@
      @if (session()->has('Message'))
      <script>
         $(document).ready(function(){
-
             Swal.fire('Message',"{{session()->get('Message')}}",'info');
         })
     </script>

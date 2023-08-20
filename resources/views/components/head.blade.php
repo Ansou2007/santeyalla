@@ -2,14 +2,13 @@
 <div class="header">
 
     <div class="header-left">
-    <a href="#" class="logo">
-    <img src="{{asset('img/logo.png')}}" alt="Logo">
+    <a href="{{route('dashboard')}}" class="logo">
+    <img src="{{asset('img/logo_santeyalla.jpeg')}}" alt="Logo">
     </a>
-    <a href="index.html" class="logo logo-small">
-    <img src="{{asset('img/logo-small.png')}}" alt="Logo" width="30" height="30">
+    <a href="{{route('dashboard')}}" class="logo logo-small">
+    <img src="{{asset('img/logo_santeyalla.jpeg')}}" alt="Logo" width="30" height="30">
     </a>
     </div>
-    
     <div class="menu-toggle">
     <a href="javascript:void(0);" id="toggle_btn">
     <i class="fas fa-bars"></i>
