@@ -55,7 +55,7 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::post('ventilation/ajout', [VentilationController::class, 'store'])->name('Ventilation.ajouter');
     Route::get('ventilation/detail/{ventilation}', [VentilationController::class, 'detail'])->name('Ventilation.detail');
     Route::get('ventilation/edition/{ventilation}', [VentilationController::class, 'edit'])->name('Ventilation.edition');
-    Route::put('ventilation/detail/{ventilation}', [VentilationController::class, 'update'])->name('Ventilation.update');
+    Route::put('ventilation/edition/{ventilation}', [VentilationController::class, 'update'])->name('Ventilation.update');
     Route::delete('ventilation/{ventilation}', [VentilationController::class, 'delete'])->name('Ventilation.delete');
     Route::get('ventilation/filtre', [VentilationController::class, 'filtre'])->name("Ventilation.filtre");
     Route::get('ventilation/rapport', [VentilationController::class, 'rapport'])->name("Ventilation.rapport");
@@ -70,7 +70,7 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::get('utilisateur', [UtilisateurController::class, 'index'])->name('Utilisateur.index');
     Route::get('utilisateur/ajout', [UtilisateurController::class, 'create'])->name('Utilisateur.ajout');
     Route::post('utilisateur/ajout', [UtilisateurController::class, 'store'])->name('Utilisateur.ajouter');
-    Route::delete('utilisateur/{utilisateur}', [UtilisateurController::class, 'delete'])->name('Utilisateur.supprimer');
+    Route::get('utilisateur/{utilisateur}', [UtilisateurController::class, 'delete'])->name('Utilisateur.supprimer');
     // Employe
     Route::get('employe', [EmployeController::class, 'index'])->name('Employe.index');
     Route::get('employe/ajout', [EmployeController::class, 'create'])->name('Employe.ajout');

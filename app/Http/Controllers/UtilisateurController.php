@@ -56,11 +56,10 @@ class UtilisateurController extends Controller
     {
     }
 
-    public function delete(User $user)
+    public function delete($utilisateur)
     {
-
+        $user = User::find($utilisateur);
         $user->delete();
-        //dd($user);
         return back()->with('Message', "Utilisateur supprimé");
     }
 

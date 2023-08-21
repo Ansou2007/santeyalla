@@ -7,6 +7,7 @@ use App\Models\Structure;
 use App\Models\User;
 use App\Models\Ventilation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VentilationController extends Controller
 {
@@ -15,8 +16,8 @@ class VentilationController extends Controller
         // $ventilation = Ventilation::all();
         $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
             ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
+            ->select('ventilations.*', 'livreurs.prenom', 'livreurs.nom', 'structures.nom_complet')
             ->get();
-        // var_dump($ventilation);
         return view('ventilation.index', compact('ventilation'));
     }
     public function create(User $user)
@@ -113,10 +114,37 @@ class VentilationController extends Controller
         return view('ventilation.filtre', compact('ventilation'));
     }
     // Rapport Ventilation
-    public function rapport()
+    public function rapport(Request $request)
     {
         $livreur = Livreur::all();
         $boulangerie = Structure::all();
-        return view('ventilation.rapport', compact('livreur', 'boulangerie'));
+        $livreurs = $request->livreur_id;
+        $structures = $request->structure_id;
+
+        $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
+            ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
+            ->where('livreur_id', $livreurs)
+            ->where('structure_id', $structures)
+            ->get();
+        // dd($ventilation);
+        return view('ventilation.rapport', compact('ventilation', 'livreur', 'boulangerie'));
     }
+
+    /* public function generer(Request $request)
+    {
+        $request->validate([
+            'livreur_id' => 'required',
+            'structure_id' => 'required',
+             'date_debut' => 'required',
+            'date_fin' => 'required', 
+        ]);
+        $livreur = $request->livreur_id;
+        $structure = $request->structure_id;
+        $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
+            ->join('structures', 'structure.id', '=', 'livreurs.structure_id')
+            ->where('livreur_id', $livreur)
+            ->where('structure_id', $structure)
+            ->get();
+            return view()
+    } */
 }

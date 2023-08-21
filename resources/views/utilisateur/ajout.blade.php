@@ -12,8 +12,8 @@
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
     <label>Boulangerie <span class="login-danger">*</span></label>
-    <select class="form-control @error('structure_id') is-invalid @enderror" id="" name="structure_id">
-        <option value="" selected disabled>Selectionner</option>
+    <select class="form-control @error('structure_id') is-invalid @enderror"  name="structure_id" id="boulangerie">
+        <option  selected disabled>Selectionner</option>
         @foreach ($structure as $structure )
             <option value="{{$structure->id}}">{{$structure->nom_complet}}</option>
         @endforeach
@@ -115,7 +115,11 @@
         })
     </script>
 @endif
-
+<script>
+    $(document).ready(function(){
+        $('#boulangerie').select2();
+    })
+</script>
 @endsection
 
 

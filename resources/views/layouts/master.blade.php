@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="{{asset('plugins/fontawesome/css/fontawesome.min.css')}}">
 <link rel="stylesheet" href="{{asset('plugins/fontawesome/css/all.min.css')}}">
 <link rel="stylesheet" href="{{asset('plugins/datatables/datatables.min.css')}}">
+<link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
 <link href="{{asset('plugins/toastr/toastr.min.css')}}">
 <link rel="stylesheet" href="{{asset('css/style.css')}}">
 <script src="{{asset('js/jquery-3.6.0.min.js')}}"></script>

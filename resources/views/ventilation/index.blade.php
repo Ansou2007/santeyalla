@@ -26,8 +26,7 @@
                 @foreach ($ventilation as $ventilation ) 
                 <tr> 
                 <td>{{$loop->index + 1}}</td>
-                <td class="text-center">{{$ventilation->livreurs->prenom}} {{$ventilation->livreurs->nom}}</td>
-                {{-- <td class="text-center">{{$ventilation->livreurs->prenom}} {{$ventilation->livreurs->nom}}</td> --}}
+                <td class="text-center">{{$ventilation->prenom}} {{$ventilation->nom}}</td>
                 <td class="text-center">
                     @if ($ventilation->nom_complet == "Sante Yalla")
                         <span class="badge badge-success">{{$ventilation->nom_complet}}</span>

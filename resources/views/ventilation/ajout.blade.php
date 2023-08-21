@@ -12,8 +12,8 @@
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
         <label for="">Livreur</label>
-                    <select class="form-control @error('livreur_id') is-invalid @enderror" name="livreur_id" >
-                        <option value="" selected disabled>Selectionnez</option>
+                    <select class="form-control @error('livreur_id') is-invalid @enderror" name="livreur_id" id="livreur">
+                        <option  selected disabled>Selectionnez</option>
                         @foreach ($livreurs as $livreur )
                         <option value="{{$livreur->id}}">{{$livreur->prenom}} {{$livreur->nom}} ({{$livreur->structures->nom_complet}})</option>
                         @endforeach
@@ -128,6 +128,8 @@
     </div>
     <script>
         $(document).ready(function(e){
+
+            $('#livreur').select2();
             /* calcul */
         function calcul() {
             var ventile = parseInt($('#ventile').val());

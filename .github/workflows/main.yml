@@ -1,4 +1,4 @@
-name: Deploy Laravel Project on push
+name: Deploiement  on push
 on:
   push:
     branches:
@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get the latest code
-        uses: actions/checkout@v2.3.2
+        # uses: actions/checkout@v2.3.2
+        uses: actions/checkout@v3
       - uses: actions/setup-node@master
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
