@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="{{asset('plugins/feather/feather.css')}}">
 
 <link rel="stylesheet" href="{{asset('plugins/icons/flags/flags.css')}}">
-
 <link rel="stylesheet" href="{{asset('plugins/fontawesome/css/fontawesome.min.css')}}">
 <link rel="stylesheet" href="{{asset('plugins/fontawesome/css/all.min.css')}}">
 <link rel="stylesheet" href="{{asset('plugins/datatables/datatables.min.css')}}">

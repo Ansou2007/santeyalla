@@ -17,25 +17,26 @@
 <li class="submenu">
 <a href="#"><i class="fas fa-graduation-cap"></i> <span>Ventilation</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="{{route('Ventilation.index')}}">Liste Ventilation</a></li>
-<li><a href="{{route('Ventilation.filtre')}}"><i class="fas fa-search"></i>Filtre Ventilation</a></li>
 <li><a href="{{route('Ventilation.ajout')}}"><i class="fas fa-plus"></i>Ajouter Ventilation</a></li>
+<li><a href="{{route('Ventilation.index')}}"><i class="fas fa-book"></i>Liste Ventilation</a></li>
+<li><a href="{{route('Ventilation.filtre')}}"><i class="fas fa-search"></i>Filtre Ventilation</a></li>
+<li><a href="{{route('Ventilation.rapport')}}"><i class="fas fa-print"></i>Rapport</a></li>
 </ul>
 </li>
 {{-- Livreur --}}
 <li class="submenu">
 <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span>Livreur</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="{{route('Livreur.index')}}">Liste Livreur</a></li>
-<li><a href="{{route('Livreur.ajout')}}">Ajouter Livreur</a></li>
+<li><a href="{{route('Livreur.ajout')}}"><i class="fas fa-plus"></i>Ajouter Livreur</a></li>
+<li><a href="{{route('Livreur.index')}}"><i class="fas fa-book"></i>Liste Livreur</a></li>
 </ul>
 </li>
 {{-- petrin --}}
 <li class="submenu">
 <a href="#"><i class="fas fa-building"></i> <span>Petrin</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="#">Liste Petrin</a></li>
-<li><a href="#">Ajouter Petrin</a></li>
+<li><a href="#"><i class="fas fa-book"></i>Liste Petrin</a></li>
+<li><a href="#"><i class="fas fa-plus"></i>Ajouter Petrin</a></li>
 </ul>
 </li>
 {{-- Paiement --}}
@@ -51,8 +52,8 @@
 <li class="submenu">
 <a href="#"><i class="fas fa-clipboard"></i> <span>Employés</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="{{route('Employe.index')}}">Liste employé</a></li>
-<li><a href="{{route('Employe.ajout')}}">Ajouter employé</a></li>
+<li><a href="{{route('Employe.index')}}"><i class="fas fa-book"></i>Liste employé</a></li>
+<li><a href="{{route('Employe.ajout')}}"><i class="fas fa-plus"></i>Ajouter employé</a></li>
 </ul>
 </li>
 {{-- Abonnement --}}
@@ -70,8 +71,8 @@
 <li class="submenu">
 <a href="#"><i class="fas fa-users"></i> <span>Utilisateurs</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="{{route('Utilisateur.index')}}">Liste utilisateur</a></li>
-<li><a href="{{route('Utilisateur.ajout')}}">Ajouter utilisateur</a></li>
+<li><a href="{{route('Utilisateur.index')}}"><i class="fas fa-book"></i>Liste utilisateur</a></li>
+<li><a href="{{route('Utilisateur.ajout')}}"><i class="fas fa-plus"></i>Ajouter utilisateur</a></li>
 </ul>
 </li>
 {{-- Reglages--}}

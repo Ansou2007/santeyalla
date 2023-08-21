@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Livreur;
+use App\Models\Structure;
 use App\Models\User;
 use App\Models\Ventilation;
 use Illuminate\Http\Request;
@@ -111,12 +112,11 @@ class VentilationController extends Controller
         $ventilation = Ventilation::whereBetween('date_ventilation', [$date_debut, $date_fin])->get();
         return view('ventilation.filtre', compact('ventilation'));
     }
-    /*  public function filtre_search(Request $request)
+    // Rapport Ventilation
+    public function rapport()
     {
-
-        $date_debut = $request->date_debut;
-        $date_fin = $request->date_fin;
-        $ventilation = Ventilation::whereBetween('date_ventilation', [$date_debut, $date_fin])->get();
-        return view('ventilation.filtre', compact('ventilation'));
-    } */
+        $livreur = Livreur::all();
+        $boulangerie = Structure::all();
+        return view('ventilation.rapport', compact('livreur', 'boulangerie'));
+    }
 }
