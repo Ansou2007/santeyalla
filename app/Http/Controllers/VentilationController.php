@@ -6,8 +6,8 @@ use App\Models\Livreur;
 use App\Models\Structure;
 use App\Models\User;
 use App\Models\Ventilation;
+use PDF;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class VentilationController extends Controller
 {
@@ -17,6 +17,7 @@ class VentilationController extends Controller
         $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
             ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
             ->select('ventilations.*', 'livreurs.prenom', 'livreurs.nom', 'structures.nom_complet')
+            ->where('ventilations.status', 'Actif')
             ->get();
         return view('ventilation.index', compact('ventilation'));
     }
@@ -106,6 +107,14 @@ class VentilationController extends Controller
         return back()->with('Message', 'Ventilation modifiée avec success');
     }
 
+    // suppression
+    public function delete($id)
+    {
+        $ventilation = Ventilation::find($id);
+        $ventilation->delete();
+        return back()->with('Message', 'Ventilation supprimée avec success');
+    }
+
     public function filtre(Request $request)
     {
         $date_debut = $request->date_debut;
@@ -118,33 +127,20 @@ class VentilationController extends Controller
     {
         $livreur = Livreur::all();
         $boulangerie = Structure::all();
-        $livreurs = $request->livreur_id;
-        $structures = $request->structure_id;
-
+        $filtre_livreur = $request->livreur_id;
+        $filtre_strcuture = $request->boulangerie;
         $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
             ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
-            ->where('livreur_id', $livreurs)
-            ->where('structure_id', $structures)
+            ->select('ventilations.*', 'livreurs.prenom', 'livreurs.nom', 'structures.nom_complet')
+            ->where('livreur_id', $filtre_livreur)
+            ->where('nom_complet', $filtre_strcuture)
             ->get();
-        // dd($ventilation);
-        return view('ventilation.rapport', compact('ventilation', 'livreur', 'boulangerie'));
+        if ($ventilation->count() > 0) {
+            $pdf = PDF::loadView('pdf.rapport_ventilation', compact('ventilation'));
+            return $pdf->download('rapport_ventilation.pdf');
+            //return view('pdf.rapport_ventilation', compact('ventilation'));
+        } else {
+            return view('ventilation.rapport', compact('boulangerie', 'livreur'))->with('Message', 'Aucune données trouvée');
+        }
     }
-
-    /* public function generer(Request $request)
-    {
-        $request->validate([
-            'livreur_id' => 'required',
-            'structure_id' => 'required',
-             'date_debut' => 'required',
-            'date_fin' => 'required', 
-        ]);
-        $livreur = $request->livreur_id;
-        $structure = $request->structure_id;
-        $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
-            ->join('structures', 'structure.id', '=', 'livreurs.structure_id')
-            ->where('livreur_id', $livreur)
-            ->where('structure_id', $structure)
-            ->get();
-            return view()
-    } */
 }

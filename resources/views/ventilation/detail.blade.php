@@ -116,8 +116,7 @@
     
     <div class="col-12">
     <div class="student-submit">
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
-    <a href="{{route('Ventilation.index')}}" class="btn btn-danger">retour</a>
+    <a href="{{route('Ventilation.index')}}" class="btn btn-primary btn-block">retour</a>
     </div>
     </div>
     </div>

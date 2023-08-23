@@ -60,7 +60,8 @@
                 <td class="text-center">
                     <a href="{{route('Ventilation.detail',['ventilation'=>$ventilation->id])}}" class="btn btn-link"><i class="fas fa-eye"></i></a>
                     <a href="{{route('Ventilation.edition',['ventilation'=>$ventilation->id])}}" class="btn btn-link"><i class="fas fa-edit"></i></a>
-                    <button class="btn btn-link"><i class="fas fa-trash"></i></button>
+                    <a href="{{route('Ventilation.delete',['ventilation'=>$ventilation->id])}}" class="btn btn-link"><i class="fas fa-trash"></i></a>
+
                 </td>
                 </tr> 
                 @endforeach
