@@ -119,7 +119,12 @@ class VentilationController extends Controller
     {
         $date_debut = $request->date_debut;
         $date_fin = $request->date_fin;
-        $ventilation = Ventilation::whereBetween('date_ventilation', [$date_debut, $date_fin])->get();
+        // $ventilation = Ventilation::whereBetween('date_ventilation', [$date_debut, $date_fin])->get();
+        $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
+            ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
+            ->select('ventilations.*', 'livreurs.prenom', 'livreurs.nom', 'structures.nom_complet')
+            ->whereBetween('date_ventilation', [$date_debut, $date_fin])
+            ->get();
         return view('ventilation.filtre', compact('ventilation'));
     }
     // Rapport Ventilation

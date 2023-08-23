@@ -41,17 +41,27 @@
                 <th class="text-center">Montant_verse</th>
                 <th class="text-center">Vendu</th>
                 <th class="text-center">Reliquat</th>
-                <th class="text-center">Action</th>
+                <th class="text-center">Edition</th>
+                {{-- <th class="text-center">Suppression</th> --}}
                 </tr>
                 </thead>
                 <tbody>
                 @foreach ($ventilation as $ventilation ) 
                 <tr> 
                 <td>{{$loop->index + 1}}</td>
-                <td class="text-center">{{$ventilation->livreurs->prenom}} {{$ventilation->livreurs->nom}}</td>
-                <td class="text-center">{{$ventilation->livreurs->structure_id}}</td>
+                <td class="text-center">{{$ventilation->prenom}} {{$ventilation->nom}}</td>
+                <td class="text-center">
+                    @if ($ventilation->nom_complet == "Sante Yalla")
+                        <span class="badge badge-success">{{$ventilation->nom_complet}}</span>
+                    @elseif ($ventilation->nom_complet == "Yaye adama Bodian")
+                    <span class="badge badge-warning">{{$ventilation->nom_complet}}</span>
+                    @else
+                    <span class="badge badge-info">{{$ventilation->nom_complet}}</span>
+                    @endif
+                </td>
                 <td>
-                    {{Carbon\Carbon::parse($ventilation->date_ventilation)->format('d/m/Y')}}
+                    {{Carbon\Carbon::parse($ventilation->date_ventilation)->format('d/m/Y') }}
+                    {{-- {{$ventilation->date_ventilation}} --}}
                 <td class="text-center">{{$ventilation->ventile}}</td>
                 <td class="text-center">{{$ventilation->non_ventile}}</td>
                 <td class="text-center">{{$ventilation->montant_verse}}</td>
@@ -60,9 +70,16 @@
                 <td class="text-center">
                     <a href="{{route('Ventilation.detail',['ventilation'=>$ventilation->id])}}" class="btn btn-link"><i class="fas fa-eye"></i></a>
                     <a href="{{route('Ventilation.edition',['ventilation'=>$ventilation->id])}}" class="btn btn-link"><i class="fas fa-edit"></i></a>
-                    <a href="{{route('Ventilation.delete',['ventilation'=>$ventilation->id])}}" class="btn btn-link"><i class="fas fa-trash"></i></a>
-
+                   
                 </td>
+                {{-- <td>
+                    <form action="{{route('Ventilation.delete',['ventilation'=>$ventilation->id])}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-link" type="submit"><i class="fas fa-trash"></i></button>
+
+                    </form>
+                </td> --}}
                 </tr> 
                 @endforeach
                 </tbody>
