@@ -18,7 +18,7 @@
         <tbody>
             @foreach ($ventilation as $ventilation)           
             <tr>
-                <td>{{$ventilation->date_ventilation}}</td>
+                <td>{{Carbon\Carbon::parse($ventilation->date_ventilation)->format('d/m/Y')}}</td>
                 <td>{{$ventilation->ventile}}</td>
                 <td>{{$ventilation->non_ventile}}</td>
             </tr>

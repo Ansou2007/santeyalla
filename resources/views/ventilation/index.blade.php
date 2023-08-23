@@ -19,7 +19,8 @@
                 <th class="text-center">Montant_verse</th>
                 <th class="text-center">Vendu</th>
                 <th class="text-center">Reliquat</th>
-                <th class="text-center">Action</th>
+                <th class="text-center">Edition</th>
+                <th class="text-center">Suppression</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,7 +38,7 @@
                     @endif
                 </td>
                 <td>
-                    {{Carbon\Carbon::parse($ventilation->date_ventilation)->format('m/d/Y') }}
+                    {{Carbon\Carbon::parse($ventilation->date_ventilation)->format('d/m/Y') }}
                     {{-- {{$ventilation->date_ventilation}} --}}
                 <td class="text-center">{{$ventilation->ventile}}</td>
                 <td class="text-center">{{$ventilation->non_ventile}}</td>
@@ -47,7 +48,9 @@
                 <td class="text-center">
                     <a href="{{route('Ventilation.detail',['ventilation'=>$ventilation->id])}}" class="btn btn-link"><i class="fas fa-eye"></i></a>
                     <a href="{{route('Ventilation.edition',['ventilation'=>$ventilation->id])}}" class="btn btn-link"><i class="fas fa-edit"></i></a>
-                    {{-- <a href="{{route('Ventilation.delete',['ventilation'=>$ventilation->id])}}" class="btn btn-link"><i class="fas fa-trash"></i></a> --}}
+                   
+                </td>
+                <td>
                     <form action="{{route('Ventilation.delete',['ventilation'=>$ventilation->id])}}" method="post">
                         @csrf
                         @method('delete')

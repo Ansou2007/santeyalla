@@ -51,7 +51,7 @@
                 <td class="text-center">{{$ventilation->livreurs->prenom}} {{$ventilation->livreurs->nom}}</td>
                 <td class="text-center">{{$ventilation->livreurs->structure_id}}</td>
                 <td>
-                    {{$ventilation->date_ventilation}}
+                    {{Carbon\Carbon::parse($ventilation->date_ventilation)->format('d/m/Y')}}
                 <td class="text-center">{{$ventilation->ventile}}</td>
                 <td class="text-center">{{$ventilation->non_ventile}}</td>
                 <td class="text-center">{{$ventilation->montant_verse}}</td>
