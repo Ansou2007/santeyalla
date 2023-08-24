@@ -132,18 +132,26 @@ class VentilationController extends Controller
     {
         $livreur = Livreur::all();
         $boulangerie = Structure::all();
+        return view('ventilation.rapport', compact('boulangerie', 'livreur'))->with('Message', 'Aucune données trouvée');
+    }
+
+    public function generate_pdf(Request $request)
+    {
+        $livreur = Livreur::all();
+        $boulangerie = Structure::all();
         $filtre_livreur = $request->livreur_id;
         $filtre_strcuture = $request->boulangerie;
         $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
             ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
-            ->select('ventilations.*', 'livreurs.prenom', 'livreurs.nom', 'structures.nom_complet')
+            ->select('ventilations.*', 'livreurs.matricule', 'livreurs.prenom', 'livreurs.nom', 'livreurs.telephone', 'structures.nom_complet')
             ->where('livreur_id', $filtre_livreur)
             ->where('nom_complet', $filtre_strcuture)
             ->get();
         if ($ventilation->count() > 0) {
+            // $data['ventilation'] = $ventilation;
             $pdf = PDF::loadView('pdf.rapport_ventilation', compact('ventilation'));
-            return $pdf->download('rapport_ventilation.pdf');
-            //return view('pdf.rapport_ventilation', compact('ventilation'));
+            return $pdf->download('ventilation.pdf');
+            //return $pdf->stream();
         } else {
             return view('ventilation.rapport', compact('boulangerie', 'livreur'))->with('Message', 'Aucune données trouvée');
         }

@@ -59,6 +59,7 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::delete('ventilation/{ventilation}', [VentilationController::class, 'delete'])->name('Ventilation.delete');
     Route::get('ventilation/filtre', [VentilationController::class, 'filtre'])->name("Ventilation.filtre");
     Route::get('ventilation/rapport', [VentilationController::class, 'rapport'])->name("Ventilation.rapport");
+    Route::post('ventilation/pdf', [VentilationController::class, 'generate_pdf'])->name("Ventilation.pdf");
     // Livreur
     Route::get('livreur', [LivreurController::class, 'index'])->name('Livreur.index');
     Route::get('livreur/ajout', [LivreurController::class, 'create'])->name('Livreur.ajout');

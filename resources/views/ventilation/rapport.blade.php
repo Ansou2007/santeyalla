@@ -5,7 +5,8 @@
     <div class="card-body pb-0">
     <div class="row">
     <div class="col-md-12">
-        <form action="" method="get" class="form">
+        <form action="{{route('Ventilation.pdf')}}" method="post" class="form">
+            @csrf
 
     <ul class="app-listing">
     <li>
