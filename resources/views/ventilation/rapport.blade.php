@@ -7,7 +7,6 @@
     <div class="col-md-12">
         <form action="{{route('Ventilation.pdf')}}" method="post" class="form">
             @csrf
-
     <ul class="app-listing">
     <li>
     <div class="multipleSelection">

@@ -77,7 +77,7 @@
 </li>
 {{-- Reglages--}}
 <li>
-<a href="javascript:void"><i class="fas fa-cog"></i> <span>Reglages</span></a>
+<a href="{{route('Reglage.index')}}"><i class="fas fa-cog"></i> <span>Reglages</span></a>
 </li>
 </ul>
 </div>

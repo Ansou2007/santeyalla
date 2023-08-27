@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('matricule');
             $table->string('prenom');
             $table->string('nom');
-            $table->string('telephone')->unique();
+            $table->integer('taux')->nullable();
+            $table->string('telephone');
             $table->string('adresse')->nullable();
             $table->boolean('typePiece')->default(0);
             $table->string('numeroPiece')->nullable();

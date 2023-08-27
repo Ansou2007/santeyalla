@@ -84,7 +84,8 @@
         <thead>
             <tr>
                 <th width="50%" colspan="2">
-                    <h2 class="text-start">Boulangerie {{$ventilation->value('nom_complet')}}</h2>
+                    <img src="{{public_path('img/logo_santeyalla.jpeg')}}" alt="" height="100px" width="100px" style="border-radius: 13px solid">
+                    <h3 class="text-start">Boulangerie {{$ventilation->value('nom_complet')}}</h3>
                 </th>
                 <th width="50%" colspan="2" class="text-end company-data">
                     <span>Vent: #6</span> <br>
@@ -100,7 +101,7 @@
         <tbody>
             <tr>
                 <td>Taux:</td>
-                <td>10%</td>
+                <td>{{$ventilation->value('taux')}}%</td>
 
                 <td>Matricule:</td>
                 <td>{{$ventilation->value('matricule')}}</td>
@@ -143,16 +144,22 @@
                 <th>Ventile</th>
                 <th>Non Ventile</th>
                 <th>Retour</th>
+                <th>Vendue</th>
+                <th>Versement</th>
+                <th>Reliquat</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($ventilation as $ventilation )           
             <tr>
                 <td width="5%">{{$loop->index+1}}</td>
-                <td width="10%">{{$ventilation->date_ventilation}}</td>
+                <td width="15%">{{Carbon\Carbon::parse($ventilation->date_ventilation)->format('d-m-Y')}}</td>
                 <td width="10%">{{$ventilation->ventile}}</td>
                 <td width="10%">{{$ventilation->non_ventile}}</td>
-                <td width="15%" class="fw-bold">{{$ventilation->retour}}</td>
+                <td width="10%" class="fw-bold">{{$ventilation->retour}}</td>
+                <td width="10%" class="fw-bold">{{$ventilation->qte_vendue}}</td>
+                <td width="15%" class="fw-bold">{{$ventilation->montant_verse}}</td>
+                <td width="15%" class="fw-bold">{{$ventilation->reliquat}}</td>
             </tr>
             @endforeach
             

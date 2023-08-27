@@ -1,7 +1,6 @@
 
 @extends('layouts.master')
 
-    <h1>bienvenue sur la plateforme</h1>
     @section('contenu')
     <div class="row">
         <div class="col-md-12 col-lg-6">

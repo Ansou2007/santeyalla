@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('reglages', function (Blueprint $table) {
             $table->id();
+            $table->enum('type', ['DATE_PAIEMENT', 'TAUX_COMMISION', 'APP_NAME', 'DEVELOPPEUR', 'AUTRE'])->default('AUTRE');
+            $table->string('value');
             $table->timestamps();
         });
     }

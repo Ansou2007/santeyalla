@@ -25,14 +25,17 @@
     </div>
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
-        <label for="">Date</label>
-        <input type="date" class="form-control @error('date_ventilation') is-invalid @enderror"  name="">
-        @error('date_ventilation')
+        <label for="">Taux Commission</label>
+        <select name="taux" id="" class="form-control @error('taux') is-invalid @enderror">
+            <option value="0"@if($livreur->taux == '0') {{'selected'}}@endif>0%</option>
+            <option value="10"@if($livreur->taux == '10') {{'selected'}}@endif>10%</option>
+            <option value="25"@if($livreur->taux == '25') {{'selected'}}@endif>25%</option>
+        </select>
+        @error('taux')
         <span class="text-danger">{{$message}}</span>
-    @enderror
+         @enderror
     </div>
     </div>
-
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
         <label for="">Prenom</label>

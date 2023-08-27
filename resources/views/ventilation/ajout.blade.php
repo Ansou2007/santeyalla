@@ -180,16 +180,13 @@
             });
         });
 
-        })
-    </script>
-    @if(session()->has('Message'))
-    <script>
-        $(document).ready(function(e){
+        @if(session()->has('Message'))        
             Swal.fire('Ventilation',"{{session()->get('Message')}}",'info');
+        @endif
+
         })
     </script>
-        
-    @endif
+    
 
 
 

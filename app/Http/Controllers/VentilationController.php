@@ -13,13 +13,30 @@ class VentilationController extends Controller
 {
     public function index()
     {
-        // $ventilation = Ventilation::all();
+        $livreur = Livreur::all();
+        $boulangerie = Structure::all();
         $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
             ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
             ->select('ventilations.*', 'livreurs.prenom', 'livreurs.nom', 'structures.nom_complet')
             ->where('ventilations.status', 'Actif')
+            ->orderBy('date_ventilation', 'desc')
             ->get();
-        return view('ventilation.index', compact('ventilation'));
+        return view('ventilation.index', compact('ventilation', 'livreur', 'boulangerie'));
+    }
+
+    public function search(Request $request)
+    {
+        $livreur = Livreur::all();
+        $boulangerie = Structure::all();
+        $filtre_livreur = $request->livreur_id;
+        $filtre_strcuture = $request->boulangerie;
+        $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
+            ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
+            ->select('ventilations.*', 'livreurs.matricule', 'livreurs.prenom', 'livreurs.nom', 'livreurs.telephone', 'structures.nom_complet')
+            ->where('livreur_id', $filtre_livreur)
+            ->where('nom_complet', $filtre_strcuture)
+            ->get();
+        return view('ventilation.index', compact('ventilation', 'livreur', 'boulangerie'));
     }
     public function create(User $user)
     {
@@ -143,9 +160,10 @@ class VentilationController extends Controller
         $filtre_strcuture = $request->boulangerie;
         $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
             ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
-            ->select('ventilations.*', 'livreurs.matricule', 'livreurs.prenom', 'livreurs.nom', 'livreurs.telephone', 'structures.nom_complet')
+            ->select('ventilations.*', 'livreurs.matricule', 'livreurs.prenom', 'livreurs.nom', 'livreurs.telephone', 'livreurs.taux', 'structures.nom_complet')
             ->where('livreur_id', $filtre_livreur)
             ->where('nom_complet', $filtre_strcuture)
+            ->orderBy('date_ventilation', 'desc')
             ->get();
         if ($ventilation->count() > 0) {
             // $data['ventilation'] = $ventilation;

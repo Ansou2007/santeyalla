@@ -11,7 +11,7 @@
     </div>    
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
-        <label for="">structure</label>
+                 <label for="">structure</label>
                     <select class="form-control @error('structure_id') is-invalid @enderror" name="structure_id" id="boulangerie" >
                         <option value="" selected disabled>Selectionnez</option>
                         @foreach ($structure as $structure )
@@ -25,14 +25,17 @@
     </div>
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
-        <label for="">Date</label>
-        <input type="date" class="form-control @error('date_ventilation') is-invalid @enderror"  name="date_ventilation">
-        @error('date_ventilation')
+        <label for="">Taux Commission</label>
+        <select name="taux" id="" class="form-control @error('taux') is-invalid @enderror">
+            <option value="0" selected>0%</option>
+            <option value="10">10%</option>
+            <option value="25">25%</option>
+        </select>
+        @error('taux')
         <span class="text-danger">{{$message}}</span>
-    @enderror
+         @enderror
     </div>
     </div>
-
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
         <label for="">Prenom</label>
@@ -42,7 +45,6 @@
         @enderror
     </div>
     </div>
-
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
         <label for="exampleInputEmail1">Nom</label>
@@ -72,7 +74,6 @@
          @enderror
     </div>
     </div>
-
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
         <label for="">Type de Piece</label>
@@ -80,10 +81,8 @@
                             <option value="0" selected>Cin</option>
                             <option value="1">Passport</option>
                         </select>
-    
     </div>
     </div>
-
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
         <label for="">Numero de Piece</label>

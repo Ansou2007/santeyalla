@@ -15,6 +15,7 @@ class Livreur extends Model
         "structure_id",
         "prenom",
         "nom",
+        "taux",
         "telephone",
         "adresse",
         "typePiece",

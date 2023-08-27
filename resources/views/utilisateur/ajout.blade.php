@@ -107,17 +107,15 @@
     </form>
     </div>
     </div>
-    
-     @if (session()->has('Message'))
-     <script>
-        $(document).ready(function(){
-            Swal.fire('Message',"{{session()->get('Message')}}",'info');
-        })
-    </script>
-@endif
+   
 <script>
     $(document).ready(function(){
         $('#boulangerie').select2();
+
+        @if (session()->has('Message'))
+            Swal.fire('Message',"{{session()->get('Message')}}",'info');
+        @endif
+
     })
 </script>
 @endsection
