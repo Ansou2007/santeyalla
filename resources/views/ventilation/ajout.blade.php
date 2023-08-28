@@ -26,7 +26,7 @@
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
         <label for="">Date ventilation</label>
-        <input type="date" class="form-control @error('date_ventilation') is-invalid @enderror"  name="date_ventilation">
+        <input type="date" class="form-control @error('date_ventilation') is-invalid @enderror"  name="date_ventilation" value="{{Carbon\Carbon::now()->toDateString()}}">
         @error('date_ventilation')
         <span class="text-danger">{{$message}}</span>
     @enderror
@@ -46,7 +46,7 @@
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
         <label for="exampleInputEmail1">Non Ventile</label>
-        <input type="number" class="form-control @error('non_ventile') is-invalid @enderror" name="non_ventile" placeholder="non ventile" id="non_ventile">
+        <input type="number" class="form-control @error('non_ventile') is-invalid @enderror" name="non_ventile" placeholder="non ventile" id="non_ventile" value="0">
         @error('non_ventile')
         <span class="text-danger">{{$message}}</span>
     @enderror
@@ -56,7 +56,7 @@
     <div class="col-12 col-sm-6">
     <div class="form-group local-forms">
         <label for="">Retour</label>
-        <input type="number" class="form-control @error('retour') is-invalid @enderror"  placeholder="retour" name="retour" id="retour">
+        <input type="number" class="form-control @error('retour') is-invalid @enderror"  placeholder="retour" name="retour" id="retour" value="0">
         @error('retour')
         <span class="text-danger">{{$message}}</span>
     @enderror

@@ -28,13 +28,14 @@ class VentilationController extends Controller
     {
         $livreur = Livreur::all();
         $boulangerie = Structure::all();
-        $filtre_livreur = $request->livreur_id;
+        $filtre_livreur = $request->matricule;
         $filtre_strcuture = $request->boulangerie;
         $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
             ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
             ->select('ventilations.*', 'livreurs.matricule', 'livreurs.prenom', 'livreurs.nom', 'livreurs.telephone', 'structures.nom_complet')
-            ->where('livreur_id', $filtre_livreur)
+            ->where('livreurs.matricule', $filtre_livreur)
             ->where('nom_complet', $filtre_strcuture)
+            ->orderBy('date_ventilation', 'desc')
             ->get();
         return view('ventilation.index', compact('ventilation', 'livreur', 'boulangerie'));
     }

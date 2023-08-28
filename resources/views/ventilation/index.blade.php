@@ -10,11 +10,11 @@
         <ul class="app-listing">
         <li>
         <div class="multipleSelection">
-            <label for=""><i class="fas fa-user me-1 select-icon"></i>Livruer</label>
-            <select name="livreur_id" id="livreur" class="form-control" required>
-                <option  selected disabled>Livreur</option>
+            <label for=""><i class="fas fa-user me-1 select-icon"></i>Livreur</label>
+            <select name="matricule"  id="livreur" class="form-control" >
+                <option  value="" selected  >Tout</option>
                 @foreach ($livreur as $livreur )
-                    <option value="{{$livreur->id}}">{{$livreur->prenom}} {{$livreur->nom}}</option>
+                    <option value="{{$livreur->matricule}}">{{$livreur->prenom}} {{$livreur->nom}}</option>
                 @endforeach
             </select>
         </div>
@@ -153,8 +153,8 @@
             $(document).ready(function(){
 
                 $('#livreur').select2({
-                placeholder: "Selectionner un livreur",
-                 allowClear: true,
+                //placeholder: "Selectionner un livreur",
+                 //allowClear: true,
                  theme: "classic"
                 });
 
