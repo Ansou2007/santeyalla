@@ -10,25 +10,25 @@
 <li class="submenu active">
 <a href="#"><i class="feather-grid active"></i> <span>Tableau de Bord</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="{{route('Admin.Dashboard')}}" class="">Admin Dashboard</a></li>
+<li><a href="{{route('Admin.Dashboard')}}"   class="{{request()->routeIs('Admin.Dashboard') ? 'active':''}}">Admin Dashboard</a></li>
 </ul>
 {{-- ventilation --}}
 </li>
 <li class="submenu">
 <a href="#"><i class="fas fa-graduation-cap"></i> <span>Ventilation</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="{{route('Ventilation.ajout')}}"><i class="fas fa-plus"></i>Ajouter Ventilation</a></li>
-<li><a href="{{route('Ventilation.index')}}"><i class="fas fa-book"></i>Liste Ventilation</a></li>
-<li><a href="{{route('Ventilation.filtre')}}"><i class="fas fa-search"></i>Filtre Ventilation</a></li>
-<li><a href="{{route('Ventilation.rapport')}}"><i class="fas fa-print"></i>Rapport</a></li>
+<li><a href="{{route('Ventilation.ajout')}}" class="{{request()->routeIs('Ventilation.ajout') ? 'active':''}}"><i class="fas fa-plus"></i>Ajouter Ventilation</a></li>
+<li><a href="{{route('Ventilation.index')}}" class="{{request()->routeIs('Ventilation.index') ? 'active':''}}"><i class="fas fa-book"></i>Liste Ventilation</a></li>
+{{-- <li><a href="{{route('Ventilation.filtre')}}"><i class="fas fa-search"></i>Filtre Ventilation</a></li> --}}
+<li><a href="{{route('Ventilation.rapport')}} " class="{{request()->routeIs('Ventilation.rapport') ? 'active':''}}"><i class="fas fa-print"></i>Rapport</a></li>
 </ul>
 </li>
 {{-- Livreur --}}
 <li class="submenu">
 <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span>Livreur</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="{{route('Livreur.ajout')}}"><i class="fas fa-plus"></i>Ajouter Livreur</a></li>
-<li><a href="{{route('Livreur.index')}}"><i class="fas fa-book"></i>Liste Livreur</a></li>
+<li><a href="{{route('Livreur.ajout')}}" class="{{request()->routeIs('Livreur.ajout') ? 'active':''}}"><i class="fas fa-plus"></i>Ajouter Livreur</a></li>
+<li><a href="{{route('Livreur.index')}}" class="{{request()->routeIs('Livreur.index') ? 'active':''}}" ><i class="fas fa-book"></i>Liste Livreur</a></li>
 </ul>
 </li>
 {{-- petrin --}}
@@ -77,7 +77,7 @@
 </li>
 {{-- Reglages--}}
 <li>
-<a href="{{route('Reglage.index')}}"><i class="fas fa-cog"></i> <span>Reglages</span></a>
+<a href="{{route('Reglage.index')}}" ><i class="fas fa-cog"></i> <span>Reglages</span></a>
 </li>
 </ul>
 </div>

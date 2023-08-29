@@ -32,7 +32,6 @@ class UtilisateurController extends Controller
             "nom" => "required",
             "email" => "required|unique:users,email",
             "telephone" => "required|numeric",
-
         ]);
         $user->create([
             "prenom" => $request->prenom,
@@ -44,12 +43,14 @@ class UtilisateurController extends Controller
             "role" => $request->role,
             "status" => $request->status,
             "adresse" => $request->adresse
-
         ]);
         return back()->with('Message', 'Utilisateur ajouté avec success');
     }
-    public function edit()
+    public function edit($utilisateur)
     {
+        //$user = User::find($utilisateur);
+        $utilisateur = User::all();
+        return view('utilisateur.index', compact('utilisateur'));
     }
 
     public function update()

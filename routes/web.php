@@ -78,6 +78,7 @@ Route::middleware('auth', 'admin')->group(function () {
         Route::get('/', [UtilisateurController::class, 'index'])->name('Utilisateur.index');
         Route::get('/ajout', [UtilisateurController::class, 'create'])->name('Utilisateur.ajout');
         Route::post('/ajout', [UtilisateurController::class, 'store'])->name('Utilisateur.ajouter');
+        Route::put('/{utilisateur}', [UtilisateurController::class, 'edit'])->name('Utilisateur.edit');
         Route::get('/{utilisateur}', [UtilisateurController::class, 'delete'])->name('Utilisateur.supprimer');
     });
     // Employe

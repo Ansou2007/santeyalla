@@ -75,8 +75,8 @@
                 <th class="text-center">Ventile</th>
                 <th class="text-center">N-Ventile</th>
                 <th class="text-center">Retour</th>
-                <th class="text-center">Montant_verse</th>
                 <th class="text-center">Vendu</th>
+                <th class="text-center">Montant_verse</th>
                 <th class="text-center">Reliquat</th>
                 <th class="text-center">Edition</th>
                 <th class="text-center">Suppression</th>
@@ -102,8 +102,8 @@
                 <td class="text-center">{{$ventilation->ventile}}</td>
                 <td class="text-center">{{$ventilation->non_ventile}}</td>
                 <td class="text-center">{{$ventilation->retour}}</td>
-                <td class="text-center">{{$ventilation->montant_verse}}</td>
                 <td class="text-center">{{$ventilation->qte_vendue}}</td>
+                <td class="text-center">{{$ventilation->montant_verse}}</td>
                 <td class="text-center">
                     {{$ventilation->reliquat}}
                     {{-- @if ($ventilation->reliquat > 0)
