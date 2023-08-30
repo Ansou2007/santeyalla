@@ -39,9 +39,9 @@
                         
                         @endif                            
                      </td>
-                     <td><a href="" class="btn btn-warning">reinistialiser</a></td>
+                     <td><button href="" class="btn btn-warning" id="BtnModal">reinistialiser</button></td>
                     <td class="text-center">
-                        <a href="{{route('Utilisateur.edit',['utilisateur'=>$utilisateur->id])}}" type="button" class="btn btn-success waves-effect waves-light mt-1" data-bs-toggle="modal" data-bs-target="#con-close-modal">Edit</a>
+                        <a href="#" type="button" class="btn btn-success BtnEdition" id="BtnEdition"  data-id="{{$utilisateur->id}}" >Edit</a>
                         <a href="{{route('Utilisateur.supprimer',['utilisateur'=>$utilisateur->id])}}" class="btn btn-link" id="supprimer"><i class="fas fa-trash"></i></a>
                     </td>
                     </tr> 
@@ -49,6 +49,72 @@
                     </tbody>
                 </table>
                 {{-- Modal Edition--}}
+
+                <!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <form action="" id="editionForm">
+  <div class="modal fade" id="editionUtilisateur" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edition Utilisateur</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <div class="row">
+                <div class="col-md-6">
+                <div class="mb-3">
+                <label for="field-1" class="form-label">Prénom</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" >
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="mb-3">
+                <label for="field-2" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="nom" name="nom" >
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                <div class="mb-3">
+                <label for="field-1" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" >
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="mb-3">
+                <label for="field-2" class="form-label">Boulangerie</label>
+                <input type="text" class="form-control" id="boulangerie" name="boulangerie" >
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                <div class="mb-3">
+                <label for="field-1" class="form-label">Telephone</label>
+                <input type="text" class="form-control" id="telephone" name="telephone" >
+                </div>
+                </div>
+                <div class="col-md-6">
+                <div class="mb-3">
+                <label for="field-2" class="form-label">Role</label>
+                <input type="text" class="form-control" id="role" name="role" >
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Modifier</button>
+        </div>
+      </div>
+    </div>
+  </div>
+               {{--  <form action="" id="modal">                
                 <div class="col-xl-6">
                     <div class="card">
                     <div class="card-body">
@@ -89,14 +155,6 @@
                     </div>
                     </div>
                     <div class="row">
-                    <div class="col-md-12">
-                    <div class="mb-3">
-                    <label for="field-3" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="field-3" placeholder="Address">
-                    </div>
-                    </div>
-                    </div>
-                    <div class="row">
                     <div class="col-md-4">
                     <div class="mb-3">
                     <label for="field-4" class="form-label">City</label>
@@ -116,14 +174,6 @@
                     </div>
                     </div>
                     </div>
-                    <div class="row">
-                    <div class="col-md-12">
-                    <div class="">
-                    <label for="field-7" class="form-label">Personal Info</label>
-                    <textarea class="form-control" id="field-7" placeholder="Write something about yourself"></textarea>
-                    </div>
-                    </div>
-                    </div>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
@@ -132,34 +182,39 @@
                     </div>
                     </div>
                     </div>
+                </form> --}}
+            </form>
                 {{-- Fin Modal--}}
         </div>
         </div>
         </div>
-        
         <script>
             $(document).ready(function(){
+
                 $('#utilisateur').DataTable();
 
                 @if (session()->has('Message'))
                     Swal.fire('Utilisateur',"{{session()->get('Message')}}",'info');
                 @endif
-           /*      
-                const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-                })
-                Toast.fire({
-                icon: 'success',
-                title: 'Signed in successfully'
-                }) */
+
+                 $('.BtnEdition').on('click',function(e){
+                        e.preventDefault();
+                        var utilisateur = $(this).data('id');
+                     $.get('utilisateur/detail/'+utilisateur,function(data){
+                       // alert(data.prenom)
+                       $('#prenom').val(data.prenom);
+                       $('#nom').val(data.nom);
+                       $('#email').val(data.email);
+                       $('#boulangerie').val(data.structure_id);
+                       $('#telephone').val(data.telephone);
+                       $('#role').val(data.role);
+                       $('#editionUtilisateur').modal('show');
+                     })
+                      
+                 
+                  
+                }); 
+                
 
                 })
         </script> 

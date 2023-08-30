@@ -46,11 +46,10 @@ class UtilisateurController extends Controller
         ]);
         return back()->with('Message', 'Utilisateur ajouté avec success');
     }
-    public function edit($utilisateur)
+    public function edit($utilisateur_id)
     {
-        //$user = User::find($utilisateur);
-        $utilisateur = User::all();
-        return view('utilisateur.index', compact('utilisateur'));
+        $data = User::find($utilisateur_id);
+        return response()->json($data);
     }
 
     public function update()

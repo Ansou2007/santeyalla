@@ -22,13 +22,13 @@
         <li>
         <div class="multipleSelection">
             <label for=""><i class="fas fa-calendar me-1 select-icon"></i>Date debut</label>
-            <input type="date" name="date_debut" id="" class="form-control">
+            <input type="date" name="date_debut" id="" class="form-control" value="{{Carbon\Carbon::now()->toDateString()}}">
         </div>
         </li>
         <li>
         <div class="multipleSelection">
             <label for=""><i class="fas fa-calendar me-1 select-icon"></i>Date fin</label>
-            <input type="date" name="date_fin" id="" class="form-control">
+            <input type="date" name="date_fin" id="" class="form-control" value="{{Carbon\Carbon::now()->toDateString()}}">
         </div>
         </li>
         <li>
@@ -117,7 +117,6 @@
                 <td class="text-center">
                     <a href="{{route('Ventilation.detail',['ventilation'=>$ventilation->id])}}" class="btn btn-link"><i class="fas fa-eye"></i></a>
                     <a href="{{route('Ventilation.edition',['ventilation'=>$ventilation->id])}}" class="btn btn-link"><i class="fas fa-edit"></i></a>
-                   
                 </td>
                 <td>
                     <form action="{{route('Ventilation.delete',['ventilation'=>$ventilation->id])}}" method="post">
@@ -165,7 +164,6 @@
                 var intVal = function(i) {
                     return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i === 'number' ? i : 0;
                 };                
-
                 //Ventile
                 Ventile = api
                     .column(4, {
@@ -175,7 +173,6 @@
                     .reduce(function(a, b) {
                         return intVal(a) + intVal(b);
                     }, 0);
-
                 // Non Ventilé
                 Nventile = api
                     .column(5, {
