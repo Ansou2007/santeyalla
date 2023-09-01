@@ -48,19 +48,21 @@ require __DIR__ . '/auth.php';
 
 // Role ADMIN
 
-Route::middleware('auth', 'admin')->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'index'])->name('Admin.Dashboard');
     // Ventilation
     Route::prefix('ventilation')->group(function () {
         Route::get('/', [VentilationController::class, 'index'])->name('Ventilation.index');
         Route::get('/ajout', [VentilationController::class, 'create'])->name('Ventilation.ajout');
         Route::post('/ajout', [VentilationController::class, 'store'])->name('Ventilation.ajouter');
-        Route::get('/detail/{ventilation}', [VentilationController::class, 'detail'])->name('Ventilation.detail');
+        // Route::get('/detail/{ventilation}', [VentilationController::class, 'detail'])->name('Ventilation.detail');
         Route::get('/edition/{ventilation}', [VentilationController::class, 'edit'])->name('Ventilation.edition');
         Route::put('/edition/{ventilation}', [VentilationController::class, 'update'])->name('Ventilation.update');
         Route::delete('/{ventilation}', [VentilationController::class, 'delete'])->name('Ventilation.delete');
-        Route::get('/filtre', [VentilationController::class, 'filtre'])->name("Ventilation.filtre");
+        // Route::get('/filtre', [VentilationController::class, 'filtre'])->name("Ventilation.filtre");
         Route::post('/search', [VentilationController::class, 'search'])->name("Ventilation.search");
+        Route::get('/detail/{id}', [VentilationController::class, 'detail_modal']);
+        Route::get('/search/{id}', [VentilationController::class, 'edit_modal']);
         Route::get('/rapport', [VentilationController::class, 'rapport'])->name("Ventilation.rapport");
         Route::post('/pdf', [VentilationController::class, 'generate_pdf'])->name("Ventilation.pdf");
     });
@@ -102,7 +104,7 @@ Route::middleware('auth', 'admin')->group(function () {
 });
 
 // ROLE VENTILEUR
-Route::middleware('auth', 'ventileur')->group(function () {
+Route::middleware(['auth', 'ventileur'])->group(function () {
     Route::get('ventileur/dashboard', [VentileurController::class, 'dashboard'])->name('Ventileur.Dashboard');
     // Route::get('ventilation', [VentilationController::class, 'index'])->name('Ventilation.index');
     /*  Route::get('ventilation/detail/{ventilation}', [VentilationController::class, 'detail'])->name('Ventilation.detail');
@@ -114,7 +116,7 @@ Route::middleware('auth', 'ventileur')->group(function () {
 });
 
 // ROLE LIVREUR
-Route::middleware('auth', 'livreur')->group(function () {
+Route::middleware(['auth', 'livreur'])->group(function () {
     Route::get('livreur/dashboard', [LivreurController::class, 'dashboard'])->name('Livreur.Dashboard');
     // Route::get('utilisateur/profil', [UtilisateurController::class, 'profile'])->name('Utilisateur.profil');
 });

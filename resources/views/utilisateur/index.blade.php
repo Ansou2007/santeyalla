@@ -50,7 +50,6 @@
                 </table>
                 {{-- Modal Edition--}}
 
-                <!-- Button trigger modal -->
 
   
   <!-- Modal -->

@@ -24,24 +24,35 @@ class VentilationController extends Controller
         return view('ventilation.index', compact('ventilation', 'livreur', 'boulangerie'));
     }
 
+    // Recherche
     public function search(Request $request)
     {
         $livreur = Livreur::all();
         $boulangerie = Structure::all();
+
         $filtre_livreur = $request->matricule;
+        $tout_livreur = $request->tout;
+        $un_livreur = $request->livreur;
+
         $filtre_structure = $request->boulangerie;
         $date_debut = $request->date_debut;
         $date_fin = $request->date_fin;
         $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
             ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
             ->select('ventilations.*', 'livreurs.matricule', 'livreurs.prenom', 'livreurs.nom', 'livreurs.telephone', 'structures.nom_complet')
-            ->where('livreurs.matricule', $filtre_livreur)
+            //->where('livreurs.matricule', $filtre_livreur)
+            ->when($un_livreur, function ($query) use ($request) {
+                $query->where('livreurs.matricule', $request->livreur);
+            })
             ->where('nom_complet', $filtre_structure)
             ->whereBetween('date_ventilation', [$date_debut, $date_fin])
             ->orderBy('date_ventilation', 'desc')
             ->get();
         return view('ventilation.index', compact('ventilation', 'livreur', 'boulangerie'));
     }
+
+
+    // Page Ajout Ventilation
     public function create(User $user)
     {
         $livreurs = Livreur::all();
@@ -95,6 +106,22 @@ class VentilationController extends Controller
         $livreur = Livreur::all();
         return view('ventilation.edition', compact('ventilation', 'livreur'));
     }
+    // Detail Modal
+    public function detail_modal($ventilation)
+    {
+        $data = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
+            ->select('ventilations.*', 'livreurs.prenom', 'livreurs.nom')
+            ->find($ventilation);
+        return response()->json($data);
+    }
+    // Edition Modal
+    public function edit_modal($ventilation)
+    {
+        $data = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
+            ->select('ventilations.*', 'livreurs.prenom', 'livreurs.nom')
+            ->find($ventilation);
+        return response()->json($data);
+    }
 
     // Mise à jour Ventilation
     public function update(Request $request, Ventilation $ventilation)
@@ -136,7 +163,7 @@ class VentilationController extends Controller
         return back()->with('Message', 'Ventilation supprimée avec success');
     }
 
-    public function filtre(Request $request)
+    /*  public function filtre(Request $request)
     {
         $date_debut = $request->date_debut;
         $date_fin = $request->date_fin;
@@ -147,7 +174,7 @@ class VentilationController extends Controller
             ->whereBetween('date_ventilation', [$date_debut, $date_fin])
             ->get();
         return view('ventilation.filtre', compact('ventilation'));
-    }
+    } */
     // Rapport Ventilation
     public function rapport(Request $request)
     {
@@ -156,6 +183,7 @@ class VentilationController extends Controller
         return view('ventilation.rapport', compact('boulangerie', 'livreur'))->with('Message', 'Aucune données trouvée');
     }
 
+    // Generer rapport pdf
     public function generate_pdf(Request $request)
     {
         $livreur = Livreur::all();
