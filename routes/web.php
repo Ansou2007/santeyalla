@@ -61,7 +61,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::delete('/{ventilation}', [VentilationController::class, 'delete'])->name('Ventilation.delete');
         // Route::get('/filtre', [VentilationController::class, 'filtre'])->name("Ventilation.filtre");
         Route::post('/search', [VentilationController::class, 'search'])->name("Ventilation.search");
-        Route::get('/detail/{id}', [VentilationController::class, 'detail_modal']);
+        Route::get('/detail/{id}', [VentilationController::class, 'detail_modal'])->name('Ventilation.detail');
         Route::get('/search/{id}', [VentilationController::class, 'edit_modal']);
         Route::get('/rapport', [VentilationController::class, 'rapport'])->name("Ventilation.rapport");
         Route::post('/pdf', [VentilationController::class, 'generate_pdf'])->name("Ventilation.pdf");

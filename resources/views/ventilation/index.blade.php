@@ -124,8 +124,9 @@
                             {{-- Detail--}}
                             {{-- <a href="{{route('Ventilation.detail',['ventilation'=>$ventilation->id])}}"
                                 class="btn btn-link"><i class="fas fa-eye"></i></a> --}}
-                            <a href="javascript::void(0)" class="btn btn-link  btnDetail"
-                                data-id="{{$ventilation->id}}"><i class="fas fa-eye"></i></a>
+                            <a href="javascript::void(0)" class="btn btn-link  btnDetail" data-id="{{$ventilation->id}}"
+                                data-attr="{{ route('Ventilation.detail', $ventilation->id) }}"><i
+                                    class="fas fa-eye"></i></a>
                             <a href="{{route('Ventilation.edition',['ventilation'=>$ventilation->id])}}"
                                 class="btn btn-link"><i class="fas fa-edit"></i></a>
                         </td>
@@ -170,7 +171,6 @@
 
 <script async>
     $(document).ready(function(){
-
             // Chargement du select 
                 $('#livreur').select2({
                 //placeholder: "Selectionner un livreur",
@@ -182,7 +182,8 @@
                 $('.btnDetail').on('click',function(e){
                     e.preventDefault();
                     var id = $(this).data('id');
-                    $.get('ventilation/detail/'+id,function(data){
+                    var url = $(this).attr('data-attr');
+                    $.get(url,function(data){
                        $('#Livreur').val(data.prenom +' '+ data.nom);
                        $('#livreur_id').val(data.livreur_id);
                        $('#ventile').val(data.ventile);
