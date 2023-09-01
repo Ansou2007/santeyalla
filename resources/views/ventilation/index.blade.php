@@ -11,12 +11,12 @@
                         <li>
                             <div class="multipleSelection">
                                 <label for=""><i class="fas fa-user me-1 select-icon"></i>Livreur</label>
-                                <select name="matricule" id="livreur" class="form-control">
-                                    <option {{is_null(request()->input('tout')) ? 'selected' : ''}} value=""
+                                <select name="livreur" id="livreur" class="form-control">
+                                    <option {{is_null(request()->input('livreur')) ? 'selected' : ''}} value=""
                                         selected>Tout</option>
                                     @foreach ($livreur as $livreur )
-                                    <option {{request()->input('livreur') == 1 ? 'selected' : ''}}
-                                        value="{{$livreur->matricule}}">{{$livreur->prenom}} {{$livreur->nom}}
+                                    <option {{request()->input('livreur') == $livreur->id ? 'selected' : ''}}
+                                        value="{{$livreur->id}}">{{$livreur->prenom}} {{$livreur->nom}}
                                     </option>
                                     @endforeach
                                 </select>
@@ -78,12 +78,13 @@
                         <th class="text-center">Livreur</th>
                         <th class="text-center">Boulangerie</th>
                         <th class="text-center">Date</th>
-                        <th class="text-center">Ventile</th>
+                        <th class="text-center" rowspan="35%">Ventile</th>
                         <th class="text-center">N-Ventile</th>
                         <th class="text-center">Retour</th>
                         <th class="text-center">Vendu</th>
-                        <th class="text-center">Montant_verse</th>
+                        <th class="text-center">Versé</th>
                         <th class="text-center">Reliquat</th>
+                        <th class="text-center">Status</th>
                         <th class="text-center">Edition</th>
                         <th class="text-center">Suppression</th>
                     </tr>
@@ -110,14 +111,14 @@
                         <td class="text-center">{{$ventilation->retour}}</td>
                         <td class="text-center">{{$ventilation->qte_vendue}}</td>
                         <td class="text-center">{{$ventilation->montant_verse}}</td>
+                        <td class="text-center">{{$ventilation->reliquat}}</td>
                         <td class="text-center">
-                            {{$ventilation->reliquat}}
-                            {{-- @if ($ventilation->reliquat > 0)
+                            @if ($ventilation->reliquat > 0)
                             <span class="badge badge-danger">{{$ventilation->reliquat}}</span>
                             @else
                             <span class="badge badge-success">{{$ventilation->reliquat}}</span>
 
-                            @endif --}}
+                            @endif
 
                         </td>
                         <td class="text-center">

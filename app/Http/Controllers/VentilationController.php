@@ -30,7 +30,7 @@ class VentilationController extends Controller
         $livreur = Livreur::all();
         $boulangerie = Structure::all();
 
-        $filtre_livreur = $request->matricule;
+        //$filtre_livreur = $request->matricule;
         $tout_livreur = $request->tout;
         $un_livreur = $request->livreur;
 
@@ -42,7 +42,7 @@ class VentilationController extends Controller
             ->select('ventilations.*', 'livreurs.matricule', 'livreurs.prenom', 'livreurs.nom', 'livreurs.telephone', 'structures.nom_complet')
             //->where('livreurs.matricule', $filtre_livreur)
             ->when($un_livreur, function ($query) use ($request) {
-                $query->where('livreurs.matricule', $request->livreur);
+                $query->where('livreurs.id', $request->livreur);
             })
             ->where('nom_complet', $filtre_structure)
             ->whereBetween('date_ventilation', [$date_debut, $date_fin])
