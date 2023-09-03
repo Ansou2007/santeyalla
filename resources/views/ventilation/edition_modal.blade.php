@@ -76,20 +76,20 @@
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="field-1" class="form-label">Qté Vendue</label>
-                                <input type="number" class="form-control qte_vendue" id="qte_vendue" name="qte_vendue">
+                                <input type="hidden" class="form-control qte_vendue" id="qte_vendue" name="qte_vendue">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="field-2" class="form-label">Montant A Versé</label>
-                                <input type="text" class="form-control montant_a_verser" id="montant_a_verser"
+                                <input type="hidden" class="form-control montant_a_verser" id="montant_a_verser"
                                     name="montant_a_verse">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="field-2" class="form-label">Reliquat</label>
-                                <input type="text" class="form-control reliquat" id="reliquat" name="reliquat">
+                                <input type="hidden" class="form-control reliquat" id="reliquat" name="reliquat">
                             </div>
                         </div>
                     </div>
