@@ -152,7 +152,7 @@ class VentilationController extends Controller
             "montant_a_verse" => $request->montant_a_verse,
             "reliquat" => $request->reliquat,
         ]);
-        return back()->with('Message', 'Ventilation modifiée avec success');
+        // return back()->with('Message', 'Ventilation modifiée avec success');
     }
 
     // suppression
@@ -163,19 +163,7 @@ class VentilationController extends Controller
         return back()->with('Message', 'Ventilation supprimée avec success');
     }
 
-    /*  public function filtre(Request $request)
-    {
-        $date_debut = $request->date_debut;
-        $date_fin = $request->date_fin;
-        // $ventilation = Ventilation::whereBetween('date_ventilation', [$date_debut, $date_fin])->get();
-        $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
-            ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
-            ->select('ventilations.*', 'livreurs.prenom', 'livreurs.nom', 'structures.nom_complet')
-            ->whereBetween('date_ventilation', [$date_debut, $date_fin])
-            ->get();
-        return view('ventilation.filtre', compact('ventilation'));
-    } */
-    // Rapport Ventilation
+    // Page des Rapports de ventilation
     public function rapport(Request $request)
     {
         $livreur = Livreur::all();
@@ -198,7 +186,6 @@ class VentilationController extends Controller
             ->orderBy('date_ventilation', 'desc')
             ->get();
         if ($ventilation->count() > 0) {
-            // $data['ventilation'] = $ventilation;
             $pdf = PDF::loadView('pdf.rapport_ventilation', compact('ventilation'));
             return $pdf->download('ventilation.pdf');
             //return $pdf->stream();

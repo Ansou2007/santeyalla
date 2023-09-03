@@ -85,8 +85,7 @@
                         <th class="text-center">Versé</th>
                         <th class="text-center">Reliquat</th>
                         <th class="text-center">Status</th>
-                        <th class="text-center">Edition</th>
-                        <th class="text-center">Suppression</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -113,34 +112,41 @@
                         <td class="text-center">{{$ventilation->montant_verse}}</td>
                         <td class="text-center">{{$ventilation->reliquat}}</td>
                         <td class="text-center">
-                            @if ($ventilation->reliquat > 0)
-                            <span class="badge badge-danger">{{$ventilation->reliquat}}</span>
+                            @if ($ventilation->reliquat > 0) <span class="badge badge-danger">
+                                {{$ventilation->reliquat}}</span>
                             @else
                             <span class="badge badge-success">{{$ventilation->reliquat}}</span>
-
                             @endif
+                        </td>
+                        <td class="text-end">
+                            <div class="dropdown dropdown-action">
+                                <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                                <div class="dropdown-menu dropdown-menu-end" style="">
+                                    {{--Voir--}}
+                                    <a href="javascript::void(0)" type="button" class="dropdown-item   btnDetail"
+                                        data-id="{{$ventilation->id}}"
+                                        data-attr="{{ route('Ventilation.detail', $ventilation->id) }}"><i
+                                            class="far fa-eye me-2">&nbspVoir</i></a>
+                                    <a href="javascript::void(0)" type="button" class="dropdown-item btnEdition"
+                                        data-id="{{$ventilation->id}}"
+                                        data-attr="{{ route('Ventilation.edition', $ventilation->id)}}"
+                                        data-site="{{ route('Ventilation.update', $ventilation->id)}}"><i
+                                            class="far fa-edit me-2">&nbspEditer</i></a>
+                                    {{--Supprimer--}}
+                                    <form action="{{route('Ventilation.delete',['ventilation'=>$ventilation->id])}}"
+                                        method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn dropdown-item" type="submit"><i
+                                                class="fas fa-trash me-2"></i>Supprimer</button>
+                                    </form>
+                                    {{-- <a href="#" type="button" class="dropdown-item" id="supprimer"><i
+                                            class="fas fa-trash me-2"></i>Supprimer</a> --}}
+                                </div>
+                            </div>
+                        </td>
 
-                        </td>
-                        <td class="text-center">
-                            {{-- Detail--}}
-                            {{-- <a href="{{route('Ventilation.detail',['ventilation'=>$ventilation->id])}}"
-                                class="btn btn-link"><i class="fas fa-eye"></i></a> --}}
-                            <a href="javascript::void(0)" class="btn btn-link  btnDetail" data-id="{{$ventilation->id}}"
-                                data-attr="{{ route('Ventilation.detail', $ventilation->id) }}"><i
-                                    class="fas fa-eye"></i></a>
-                            <a href="{{route('Ventilation.edition',['ventilation'=>$ventilation->id])}}"
-                                class="btn btn-link"><i class="fas fa-edit"></i></a>
-                        </td>
-                        <td>
-                            <form action="{{route('Ventilation.delete',['ventilation'=>$ventilation->id])}}"
-                                method="post">
-                                @csrf
-                                @method('delete')
-                                <button class="btn btn-link" type="submit"><i class="fas fa-trash"></i></button>
-                            </form>
-                            <a href="javascript::void(0)" type="button" class="btn btn-link btnEdition"
-                                data-id="{{$ventilation->id}}">Edition</a>
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -154,9 +160,9 @@
                         <th style="background-color:yellow;font-size:20px;text-align:center">Non
                             Ventile:</th>
                         <th style="background-color:gray;font-size:20px;text-align:center">Retour</th>
-                        <th style="background-color:green;font-size:20px;text-align:center">
-                            Montant-Versé:</th>
-                        <th style="background-color:red;font-size:20px;text-align:center">Qté-Vendue:
+                        <th style="background-color:green;font-size:20px;text-align:center">Qté-Vendue:
+                        </th>
+                        <th style="background-color:red;font-size:20px;text-align:center">Montant-Versé:
                         </th>
                         <th style="background-color:gray;font-size:20px;text-align:center">Reliquat:</th>
                     </tr>
@@ -178,7 +184,6 @@
                  //allowClear: true,
                  theme: "classic"
                 });
-
                 // Ouverture du Modal Detail
                 $('.btnDetail').on('click',function(e){
                     e.preventDefault();
@@ -191,7 +196,7 @@
                         $('#non_ventile').val(data.non_ventile);
                         $('#date_ventilation').val(data.date_ventilation);
                         $('#pu').val(data.pu);
-                        $('#mtn_verse').val(data.montant_a_verse);
+                        $('#mtn_verse').val(data.mtn_verse);
                         $('#location').val(data.location);
                         $('#retour').val(data.retour);
                         $('#qte_vendue').val(data.qte_vendue);
@@ -204,15 +209,18 @@
                 $('.btnEdition').on('click',function(e){
                     e.preventDefault();
                     var id = $(this).data('id');
-                    $.get('ventilation/search/'+id,function(data){
-                       // alert(data.ventile);
+                    var url = $(this).attr('data-attr');
+                    var url1 = $(this).attr('data-site');                  
+
+                    $.get(url,function(data){
+                        $('.ventilation_id').val(data.id);
                         $('.Livreur').val(data.prenom +' '+ data.nom);
-                       $('#livreur_id').val(data.livreur_id);
+                       $('.livreur_id').val(data.livreur_id);
                        $('.ventile').val(data.ventile);
                         $('.non_ventile').val(data.non_ventile);
                         $('.date_ventilation').val(data.date_ventilation);
                         $('.pu').val(data.pu);
-                        $('.mtn_verse').val(data.montant_a_verse);
+                        $('.mtn_verse').val(data.montant_verse);
                         $('.location').val(data.location);
                         $('.retour').val(data.retour);
                         $('.qte_vendue').val(data.qte_vendue);
@@ -222,7 +230,79 @@
                     });
                 });
 
+                // Envois des données
+                $('.EditionForm').on('submit',function(e){
+                    e.preventDefault();
+                    var id = $('.ventilation_id').val();
+                    var url = '{{ route("Ventilation.update", ":id") }}';
+                    url = url.replace(':id',id);
+                   // var url = $('.lien_site').val(); 
+                    var donnees = $(this).serialize();
+                   
+                     $.ajax({
+                        url:url,
+                        data:donnees,
+                        method:"put",
+                        success:function(data){
+                            Swal.fire('Ventilation','Ventilation modifié','info');
+                            window.location.reload();
+                        },
+                        error:function(error){
+                            console.log(error);
+                        }
+                    }); 
+                })
+               
+            /* calcul */
+        function calcul() {
+            var ventile = parseInt($('.ventile').val());
+            var nventile = parseInt($('.non_ventile').val());
+            var retour = parseInt($('.retour').val());
+            var prix = parseInt($('.pu').val());
+            var location = parseInt($('.location').val());
+            var mtn_verse = parseInt($('.mtn_verse').val());
+            var qte_vendue = ventile - (nventile + retour);
+            var montant_vendue = (qte_vendue * prix) - location;
+            $('.qte_vendue').val(qte_vendue);
+            $('.montant_a_verser').val(montant_vendue);
+            var reliquat = montant_vendue - mtn_verse;
+            $('.reliquat').val(reliquat);
+            console.log('Qté Vendue :' + qte_vendue);
+            console.log('Montant Vendue : ' + montant_vendue);
+            console.log('Reliquat : ' + reliquat);
+        }
+        $('.pu').on('keyup',function(e){
+            e.preventDefault();
+            calcul();
+        });
+        $('.location').on('keyup',function(e){
+            e.preventDefault();
+            calcul();
+        });
 
+        $('.mtn_verse').on('keyup',function(e){
+            e.preventDefault();
+            calcul();
+        });
+        // Verification
+        $('#btn_verify').click(function(e){
+            e.preventDefault();
+            calcul();
+            var location = $('.location').val();
+            var montant = $('.montant_a_verser').val();
+            var qte = $('.qte_vendue').val();
+            var reliquat = $('.reliquat').val();
+            swal.fire({
+                icon: 'info',
+                toast: true,
+                title: 'Verification',
+                text: 'Vendue = ' + qte + ' Montant = ' + montant + ' Reliquat = ' + reliquat
+            });
+        });
+
+      
+
+                //Chargement datatable
                 $('#ventilation').DataTable({
                     footerCallback: function(row, data, start, end, display) {
                 var api = this.api();

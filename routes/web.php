@@ -55,14 +55,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/', [VentilationController::class, 'index'])->name('Ventilation.index');
         Route::get('/ajout', [VentilationController::class, 'create'])->name('Ventilation.ajout');
         Route::post('/ajout', [VentilationController::class, 'store'])->name('Ventilation.ajouter');
-        // Route::get('/detail/{ventilation}', [VentilationController::class, 'detail'])->name('Ventilation.detail');
-        Route::get('/edition/{ventilation}', [VentilationController::class, 'edit'])->name('Ventilation.edition');
+        Route::get('/detail/{id}', [VentilationController::class, 'detail_modal'])->name('Ventilation.detail');
+        // Route::get('/edition/{ventilation}', [VentilationController::class, 'edit'])->name('Ventilation.edition');
         Route::put('/edition/{ventilation}', [VentilationController::class, 'update'])->name('Ventilation.update');
         Route::delete('/{ventilation}', [VentilationController::class, 'delete'])->name('Ventilation.delete');
-        // Route::get('/filtre', [VentilationController::class, 'filtre'])->name("Ventilation.filtre");
         Route::post('/search', [VentilationController::class, 'search'])->name("Ventilation.search");
-        Route::get('/detail/{id}', [VentilationController::class, 'detail_modal'])->name('Ventilation.detail');
-        Route::get('/search/{id}', [VentilationController::class, 'edit_modal']);
+        Route::get('/search/{id}', [VentilationController::class, 'edit_modal'])->name('Ventilation.edition');
         Route::get('/rapport', [VentilationController::class, 'rapport'])->name("Ventilation.rapport");
         Route::post('/pdf', [VentilationController::class, 'generate_pdf'])->name("Ventilation.pdf");
     });

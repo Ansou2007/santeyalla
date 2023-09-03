@@ -146,7 +146,6 @@
             console.log('Qté Vendue :' + qte_vendue);
             console.log('Montant Vendue : ' + montant_vendue);
             console.log('Reliquat : ' + reliquat);
-
         }
 
         $('#pu').on('keyup',function(e){

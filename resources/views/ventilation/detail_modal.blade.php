@@ -1,7 +1,7 @@
 {{-- Modal Edition--}}
 
 <!-- Modal -->
-<form action="" id="editionForm">
+<form action="" id="DetailForm">
     <div class="modal fade" id="detailVentilation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

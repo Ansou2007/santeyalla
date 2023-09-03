@@ -1,5 +1,7 @@
 {{-- Modal Edition--}}
-<form action="" id="editionForm">
+<form id="EditionForm" class="EditionForm">
+    @csrf
+    @method('put')
     <div class="modal fade" id="editionVentilation" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -11,7 +13,8 @@
                 <div class="modal-body">
 
                     <div class="row">
-                        <input type="hidden" name="livreur_id" id="livreur_id">
+                        <input type="hidden" class="ventilation_id" name="ventilation_id" id="ventilation_id">
+                        <input type="hidden" class="livreur_id" name="livreur_id" id="livreur_id">
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="" class="form-label">Livreur</label>
@@ -59,7 +62,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="field-1" class="form-label">Montant Versé</label>
-                                <input type="number" class="form-control mtn_verse" id="mtn_verse" name="mtn_verse">
+                                <input type="number" class="form-control mtn_verse" id="mtn_verse" name="montant_verse">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -80,7 +83,7 @@
                             <div class="mb-3">
                                 <label for="field-2" class="form-label">Montant A Versé</label>
                                 <input type="text" class="form-control montant_a_verser" id="montant_a_verser"
-                                    name="montant_a_verser">
+                                    name="montant_a_verse">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -93,8 +96,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
-                    <button type="button" class="btn btn-warning">Verifier</button>
-                    <button type="button" class="btn btn-primary">Modifier</button>
+                    <button type="button" id="btn_verify" class="btn btn-warning">Verifier</button>
+                    <button type="submit" class="btn btn-primary">Modifier</button>
                 </div>
             </div>
         </div>

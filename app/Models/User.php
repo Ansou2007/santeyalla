@@ -63,4 +63,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Structure::class, 'structure_id');
     }
+
+    // Feature
+    public function isAdmin()
+    {
+        return $this->roles()->where('nom', 'Admin');
+    }
+    public function hasAnyRole(array $role)
+    {
+        return $this->roles()->whereIn('nom', $role)->first();
+    }
 }

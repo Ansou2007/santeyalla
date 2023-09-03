@@ -32,5 +32,16 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('Ventileur', function (User $user) {
             return $user->hasRole('Ventileur');
         });
+
+        // Feature
+        Gate::define('Manager', function ($user) {
+            return $user->hasAnyRole('Ventileur', 'Admin', 'Livreur');
+        });
+        Gate::define('Admin', function ($user) {
+            return $user->isAdmin();
+        });
+        Gate::define('Suppression', function ($user) {
+            return $user->isAdmin();
+        });
     }
 }
