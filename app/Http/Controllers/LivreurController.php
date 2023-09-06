@@ -31,7 +31,8 @@ class LivreurController extends Controller
             "prenom" => 'required',
             "nom" => 'required',
             "structure_id" => 'required',
-            "telephone" => 'required|numeric|unique:livreurs,telephone',
+            // "telephone" => 'required|numeric|unique:livreurs,telephone',
+            "telephone" => 'required|numeric|',
             // "photo" => 'required|image|mimes:png,jpg,jpeg,gif',
         ]);
         if (Livreur::where('telephone', $request->telephone)->count() > 0) {

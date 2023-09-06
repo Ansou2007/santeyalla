@@ -26,8 +26,7 @@ class Sauvegarde extends Command
      */
     public function handle()
     {
-        // $filename = "Sauvegarde_" . Carbon::now()->format('d/m/Y') . ".sql";
-        $filename = "Sauvegarde.sql";
+        $filename = "Sauvegarde_" . Carbon::now()->format('d/m/Y') . ".sql";
         $commande = "mysqldump --user=" . env('DB_USERNAME') . " --password=" . env('DB_PASSWORD') . " --host=" . env('DB_HOST') . " > " . storage_path() . "/app/sauvegarde/" . $filename;
         $returnVar = NULL;
         $output  = NULL;

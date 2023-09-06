@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbonnementController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeController;
 use App\Http\Controllers\LivreurController;
@@ -56,11 +57,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/ajout', [VentilationController::class, 'create'])->name('Ventilation.ajout');
         Route::post('/ajout', [VentilationController::class, 'store'])->name('Ventilation.ajouter');
         Route::get('/detail/{id}', [VentilationController::class, 'detail_modal'])->name('Ventilation.detail');
-        // Route::get('/edition/{ventilation}', [VentilationController::class, 'edit'])->name('Ventilation.edition');
         Route::put('/edition/{ventilation}', [VentilationController::class, 'update'])->name('Ventilation.update');
+        Route::get('/edit/{id}', [VentilationController::class, 'edit_modal'])->name('Ventilation.edition');
         Route::delete('/{ventilation}', [VentilationController::class, 'delete'])->name('Ventilation.delete');
         Route::post('/search', [VentilationController::class, 'search'])->name("Ventilation.search");
-        Route::get('/search/{id}', [VentilationController::class, 'edit_modal'])->name('Ventilation.edition');
         Route::get('/rapport', [VentilationController::class, 'rapport'])->name("Ventilation.rapport");
         Route::post('/pdf', [VentilationController::class, 'generate_pdf'])->name("Ventilation.pdf");
     });
@@ -72,6 +72,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/detail/{livreur}', [LivreurController::class, 'edit'])->name('Livreur.edition');
         Route::put('/detail{livreur}', [LivreurController::class, 'update'])->name('Livreur.update');
         Route::delete('/{livreur}', [LivreurController::class, 'delete'])->name('Livreur.delete');
+    });
+    // Abonnement
+    Route::prefix('abonnement')->group(function () {
+        Route::get('/', [AbonnementController::class, 'index'])->name('Abonnement.index');
+        Route::post('/', [AbonnementController::class, 'store'])->name('Abonnement.ajouter');
+        Route::get('/edition/{id}', [AbonnementController::class, 'edition'])->name('Abonnement.edition');
+        Route::put('/edittion/{id}', [AbonnementController::class, 'update'])->name('Abonnement.update');
     });
     // Utilisateur
     Route::prefix('utilisateur')->group(function () {
