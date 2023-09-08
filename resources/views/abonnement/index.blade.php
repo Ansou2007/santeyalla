@@ -40,11 +40,11 @@
                                     <a href="javascript::void(0)" type="button" class="dropdown-item BtnEdition"
                                         id="BtnEdition" data-id="{{$abonne->id}}" data-id1="{{$abonne->id}}"><i
                                             class="far fa-edit me-2"></i>Edition</a>
-                                    <a href="{{route('Utilisateur.supprimer',['utilisateur'=>$abonne->id])}}"
-                                        class="dropdown-item btn btn-link" id="supprimer"><i
+                                    <a href="javascript::void(0)" data-id="{{$abonne->id}}"
+                                        data-url="{{route('Abonnement.delete',$abonne->id)}}"
+                                        class="BtnSupprimer dropdown-item btn btn-link" id="supprimer"><i
                                             class="fas fa-trash"></i>Supprimer</a>
-                                    <a class="dropdown-item" href="javascript::void(0)"><i
-                                            class="far fa-eye me-2"></i>View</a>
+
 
                                 </div>
                             </div>
@@ -89,6 +89,7 @@
                         }
                     })
                 });
+                // Edition
                 $('.BtnEdition').on('click',function(e){
                     e.preventDefault();
                     var id= $(this).attr('data-id');
@@ -107,6 +108,7 @@
                     });
 
                 });
+                // Update
                    $('.EditForm').on('submit',function(e){
                         e.preventDefault();
                         var id=$('.id').val();
@@ -127,12 +129,44 @@
 
                         }
                     });                  
-                });  
-                
+                }); 
+                // Suppression
+                $('.BtnSupprimer').on('click',function(e){
+                    e.preventDefault();
+                    var id = $(this).attr('data-id');
+                    var url = $(this).attr('data-url');
+                    Swal.fire({
+                    title: 'Voulez-vous supprimer ?',
+                    text: "La suppression est irréversible",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText:"Annuler",
+                    confirmButtonText: 'Oui,supprimer'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                       $.ajax({
+                        url:url,
+                        method:'get',
+                        success:function(data){
+                            window.location.reload();
+                        },error:function(data){
+                            alert('erreur');
+                        }
+
+                       });
+                    }
+                    })
+
+                });
+
+                // Affichage Message
                 @if(session()->has('Message'))
                     Swal.fire('Ventilation',"{{session()->get('Message')}}",'info');
                 @endif
-                })
+
+    })
 </script>
 
 @endsection

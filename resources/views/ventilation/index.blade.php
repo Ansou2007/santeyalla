@@ -134,15 +134,18 @@
                                         data-site="{{ route('Ventilation.update', $ventilation->id)}}"><i
                                             class="far fa-edit me-2">&nbspEditer</i></a>
                                     {{--Supprimer--}}
-                                    <form action="{{route('Ventilation.delete',['ventilation'=>$ventilation->id])}}"
+                                    {{-- <form
+                                        action="{{route('Ventilation.delete',['ventilation'=>$ventilation->id])}}"
                                         method="post">
                                         @csrf
                                         @method('delete')
                                         <button class="btn dropdown-item" type="submit"><i
                                                 class="fas fa-trash me-2"></i>Supprimer</button>
-                                    </form>
-                                    {{-- <a href="#" type="button" class="dropdown-item" id="supprimer"><i
-                                            class="fas fa-trash me-2"></i>Supprimer</a> --}}
+                                    </form> --}}
+                                    <a href="javascript::void(0)" data-id="{{$ventilation->id}}"
+                                        data-url="{{route('Ventilation.delete',$ventilation->id)}}"
+                                        class="BtnSupprimer dropdown-item" id="supprimer"><i
+                                            class="fas fa-trash me-2"></i>Supprimer</a>
                                 </div>
                             </div>
                         </td>
@@ -185,6 +188,7 @@
                  //allowClear: true,
                  theme: "classic"
                 });
+
                 // Ouverture du Modal Detail
                 $('.btnDetail').on('click',function(e){
                     e.preventDefault();
@@ -206,13 +210,12 @@
                         $('#detailVentilation').modal('show');
                     });
                 });
+
                 // Ouverture du Modal Edition
                 $('.btnEdition').on('click',function(e){
                     e.preventDefault();
                     var id = $(this).data('id');
                     var url = $(this).attr('data-attr');
-                    var url1 = $(this).attr('data-site');                  
-
                     $.get(url,function(data){
                         $('.ventilation_id').val(data.id);
                         $('.Livreur').val(data.prenom +' '+ data.nom);
@@ -237,9 +240,7 @@
                     var id = $('.ventilation_id').val();
                     var url = '{{ route("Ventilation.update", ":id") }}';
                     url = url.replace(':id',id);
-                   // var url = $('.lien_site').val(); 
                     var donnees = $(this).serialize();
-                   
                      $.ajax({
                         url:url,
                         data:donnees,
@@ -252,6 +253,36 @@
                             console.log(error);
                         }
                     }); 
+                })
+
+                // Suppression
+                $('.BtnSupprimer').on('click',function(e){
+                    e.preventDefault();
+                    var id = $(this).attr('data-id');
+                    var url = $(this).attr('data-url');
+                    Swal.fire({
+                    title: 'Voulez-vous supprimer ?',
+                    text: "La suppression est irréversible",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText:"Annuler",
+                    confirmButtonText: 'Oui,supprimer'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                       $.ajax({
+                        url:url,
+                        method:'get',
+                        success:function(data){
+                            window.location.reload();
+                        },error:function(data){
+                            alert('erreur');
+                        }
+
+                       });
+                    }
+                    })
                 })
                
             /* calcul */

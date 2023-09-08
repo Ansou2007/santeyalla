@@ -72,4 +72,13 @@ class AbonnementController extends Controller
 
         return redirect()->back()->with('Message', 'Abonné modifié');
     }
+
+    // Suppression
+
+    public function delete($id)
+    {
+        $abonnement = Abonnement::find($id);
+        $abonnement->delete();
+        return back()->with('Message', 'Abonné supprimé avec success');
+    }
 }

@@ -59,7 +59,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/detail/{id}', [VentilationController::class, 'detail_modal'])->name('Ventilation.detail');
         Route::put('/edition/{ventilation}', [VentilationController::class, 'update'])->name('Ventilation.update');
         Route::get('/edit/{id}', [VentilationController::class, 'edit_modal'])->name('Ventilation.edition');
-        Route::delete('/{ventilation}', [VentilationController::class, 'delete'])->name('Ventilation.delete');
+        // Route::delete('/{ventilation}', [VentilationController::class, 'delete'])->name('Ventilation.delete');
+        Route::get('delete/{id}', [VentilationController::class, 'delete'])->name('Ventilation.delete');
         Route::post('/search', [VentilationController::class, 'search'])->name("Ventilation.search");
         Route::get('/rapport', [VentilationController::class, 'rapport'])->name("Ventilation.rapport");
         Route::post('/pdf', [VentilationController::class, 'generate_pdf'])->name("Ventilation.pdf");
@@ -79,6 +80,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/', [AbonnementController::class, 'store'])->name('Abonnement.ajouter');
         Route::get('/edition/{id}', [AbonnementController::class, 'edition'])->name('Abonnement.edition');
         Route::post('/update', [AbonnementController::class, 'update'])->name('Abonnement.update');
+        Route::get('/delete/{id}', [AbonnementController::class, 'delete'])->name('Abonnement.delete');
     });
     // Utilisateur
     Route::prefix('utilisateur')->group(function () {
