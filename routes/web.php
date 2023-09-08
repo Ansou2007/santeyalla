@@ -78,7 +78,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/', [AbonnementController::class, 'index'])->name('Abonnement.index');
         Route::post('/', [AbonnementController::class, 'store'])->name('Abonnement.ajouter');
         Route::get('/edition/{id}', [AbonnementController::class, 'edition'])->name('Abonnement.edition');
-        Route::put('/edittion/{id}', [AbonnementController::class, 'update'])->name('Abonnement.update');
+        Route::post('/update', [AbonnementController::class, 'update'])->name('Abonnement.update');
     });
     // Utilisateur
     Route::prefix('utilisateur')->group(function () {

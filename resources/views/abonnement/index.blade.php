@@ -107,25 +107,26 @@
                     });
 
                 });
-                  $('#EditForm').on('submit',function(e){
+                   $('.EditForm').on('submit',function(e){
                         e.preventDefault();
-                        var id=$('#id').val();
+                        var id=$('.id').val();
                         var donnees = $(this).serialize();
-                    var url = "{{route('Abonnement.update',':id')}}";
-                    url = url.replace(':id',id);
+                   // var url = "{{route('Abonnement.update',':id')}}";
+                    var url = "{{route('Abonnement.update')}}";
+                   // url = url.replace(':id',id);
                     $.ajax({
                         url:url,
                         data:donnees,
-                        method:"put",
+                        method:"post",
                         success:function(data){
-                            alert('ajout avec success');
+                            //alert('ajout avec success');
+                            Swal.fire('Ventilation',"{{session()->get('Message')}}",'info');
+                            window.location.reload();
                         },error:function(data){
                             alert('erreur');
 
                         }
-                    });
-                 
-                  
+                    });                  
                 });  
                 
                 @if(session()->has('Message'))

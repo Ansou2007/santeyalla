@@ -61,14 +61,15 @@ class AbonnementController extends Controller
                 "date_abonnement" => 'required',
             ]
         );
-        $abonnement->update(
-            [
-                "structure_id" => $request->structure_id,
-                "prenom" => $request->prenom,
-                "nom" => $request->nom,
-                "date_abonnement" => $request->date_abonnement,
-            ]
-        );
+        $abonne_id = $request->input('id');
+        $abonnement = Abonnement::find($abonne_id);
+        $abonnement->structure_id = $request->input('structure_id');
+        $abonnement->prenom = $request->input('prenom');
+        $abonnement->nom = $request->input('nom');
+        $abonnement->telephone = $request->input('telephone');
+        $abonnement->date_abonnement = $request->input('date_abonnement');
+        $abonnement->save();
+
         return redirect()->back()->with('Message', 'Abonné modifié');
     }
 }

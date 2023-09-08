@@ -1,5 +1,5 @@
 <!-- Modal -->
-<form id="EditForm">
+<form id="EditForm" class="EditForm" method="post">
     @csrf
     @method('post')
     <div class="modal fade" id="editAbonnement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -15,7 +15,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="field-1" class="form-label">Boulangerie</label>
-                                <input type="text" class="form-control id" name="id" id="id">
+                                <input type="hidden" class="form-control id" name="id" id="id">
                                 <input type="hidden" class="form-control structure_id" name="structure_id"
                                     id="structure_id">
                                 <input type="text" class="form-control boulangerie" name="boulangerie" id="boulangerie"
