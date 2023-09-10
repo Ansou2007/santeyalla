@@ -2,13 +2,13 @@
 @section('contenu')
 <div class="card">
     <div class="card-header">
-        <h5 class="card-title">Liste Abonnés</h5>
+        <h5 class="card-title">Liste Abonnement</h5>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col">
                 <div class="col-auto float-end">
-                    <button class="BtnAjouter btn btn-primary mb-2">Ajouter Abonné</button>
+                    <button class="BtnAjouter btn btn-primary mb-2">Ajouter Abonnement</button>
                 </div>
             </div>
         </div>
@@ -18,30 +18,36 @@
                     <tr>
                         <th>ID</th>
                         <th>Nom Complet</th>
-                        <th>Boulangerie</th>
                         <th>Telephone</th>
-                        <th>Abonnement</th>
+                        <th>Boulangerie</th>
+                        <th>Date</th>
+                        <th>Qté</th>
+                        <th>Pu</th>
+                        <th>Montant</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($abonnes as $abonne )
+                    @foreach ($data as $abonnement )
                     <tr>
                         <td>{{$loop->index + 1}}</td>
-                        <td>{{$abonne->prenom}} {{$abonne->nom}}</td>
-                        <td>{{$abonne->nom_complet}} </td>
-                        <td><span class="">{{$abonne->telephone}}</span> </td>
-                        <td> {{carbon\Carbon::parse($abonne->date_abonnement)->format('d-m-Y')}}</td>
+                        <td>{{$abonnement->abonnements->prenom}} {{$abonnement->abonnements->nom}}</td>
+                        <td><span class="">{{$abonnement->abonnements->telephone}}</span> </td>
+                        <td><span class="">{{$abonnement->nom_complet}}</span> </td>
+                        <td> {{carbon\Carbon::parse($abonnement->date_ventilation)->format('d-m-Y')}}</td>
+                        <td>{{$abonnement->qte}} </td>
+                        <td>{{$abonnement->pu}} </td>
+                        <td>{{$abonnement->montant}} </td>
                         <td class="text-end">
                             <div class="dropdown dropdown-action">
                                 <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
                                 <div class="dropdown-menu dropdown-menu-end" style="">
                                     <a href="javascript::void(0)" type="button" class="dropdown-item BtnEdition"
-                                        id="BtnEdition" data-id="{{$abonne->id}}" data-id1="{{$abonne->id}}"><i
+                                        id="BtnEdition" data-id="{{$abonnement->id}}"><i
                                             class="far fa-edit me-2"></i>Edition</a>
-                                    <a href="javascript::void(0)" data-id="{{$abonne->id}}"
-                                        data-url="{{route('Abonnement.delete',$abonne->id)}}"
+                                    <a href="javascript::void(0)" data-id="{{$abonnement->id}}"
+                                        data-url="{{route('Abonnements.delete',$abonnement->id)}}"
                                         class="BtnSupprimer dropdown-item btn btn-link" id="supprimer"><i
                                             class="fas fa-trash"></i>Supprimer</a>
 
@@ -53,23 +59,17 @@
                     @endforeach
                 </tbody>
             </table>
-            @include('abonnement.ajout')
-            @include('abonnement.edit')
+            @include('abonnements.ajout')
+            @include('abonnements.edit')
         </div>
     </div>
 </div>
 <script>
     $(document).ready(function(){
 
-                $('#abonnement').DataTable();
-
-                @if (session()->has('Message'))
-                    Swal.fire('Abonnement',"{{session()->get('Message')}}",'info');
-                @endif
-
+                // Modal Ajout
                  $('.BtnAjouter').on('click',function(e){
                         e.preventDefault();
-                    // alert('coucou');
                     $('#ajoutAbonnement').modal('show');                 
                 }); 
                 // Envois
@@ -77,7 +77,7 @@
                     e.preventDefault();
                     var donnees = $(this).serialize();
                     $.ajax({
-                        url:"{{route('Abonnement.ajouter')}}",
+                        url:"{{route('Abonnements.ajout')}}",
                         method:'post',
                         data:donnees,
                         success:function(data){
@@ -93,12 +93,12 @@
                 $('.BtnEdition').on('click',function(e){
                     e.preventDefault();
                     var id= $(this).attr('data-id');
-                    var url = "{{route('Abonnement.edition',':id')}}";
+                    var url = "{{route('Abonnements.edition',':id')}}";
                     url = url.replace(':id',id);
                     $.get(url,function(data){
                         //console.log(data);
-                        $('#id').val(data.id);
-                        $('#structure_id').val(data.structure_id);
+                        $('.id').val(data.id);
+                        $('.structure_id').val(data.structure_id);
                         $('.boulangerie').val(data.nom_complet);
                         $('.prenom').val(data.prenom);
                         $('.nom').val(data.nom);
@@ -113,9 +113,8 @@
                         e.preventDefault();
                         var id=$('.id').val();
                         var donnees = $(this).serialize();
-                   // var url = "{{route('Abonnement.update',':id')}}";
-                    var url = "{{route('Abonnement.update')}}";
-                   // url = url.replace(':id',id);
+                    var url = "{{route('Abonnement.update',':id')}}";
+                    url = url.replace(':id',id);
                     $.ajax({
                         url:url,
                         data:donnees,
@@ -161,10 +160,12 @@
 
                 });
 
-                // Affichage Message
-                @if(session()->has('Message'))
-                    Swal.fire('Ventilation',"{{session()->get('Message')}}",'info');
+                $('.abonnement').DataTable();
+                @if (session()->has('Message'))
+                    Swal.fire('Abonnement',"{{session()->get('Message')}}",'info');
                 @endif
+
+                
 
     })
 </script>

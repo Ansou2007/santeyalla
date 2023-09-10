@@ -77,8 +77,8 @@
                 <a href="#"><i class="fas fa-clipboard"></i> <span>Abonnement</span> <span
                         class="menu-arrow"></span></a>
                 <ul>
-                    <li><a href="{{route('Abonnement.index')}}">Liste abonnement</a></li>
-                    <li><a href="avascript:void(0)">Ajouter abonnement</a></li>
+                    <li><a href="{{route('Abonnement.index')}}">Liste Abonnés</a></li>
+                    <li><a href="{{route('Abonnements.index')}}">Liste Abonnement</a></li>
                 </ul>
             </li>
             <li class="menu-title">

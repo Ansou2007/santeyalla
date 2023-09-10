@@ -61,6 +61,8 @@ class LivreurController extends Controller
         $structure = Structure::all();
         return view('livreur.edition', compact('structure', 'livreur'));
     }
+
+    // Modification
     public function update(Request $request, Livreur $livreur)
     {
         $request->validate([
@@ -83,7 +85,14 @@ class LivreurController extends Controller
             "numeroPiece" => $request->numeroPiece,
             "photo" => $request->photo
         ]);
-
         return back()->with("Message", "Livreur modifié avec succés");
+    }
+
+    // Suppression
+
+    public function delete($id)
+    {
+        $livreur = Livreur::find($id);
+        $livreur->delete();
     }
 }

@@ -16,7 +16,7 @@ class AbonnementController extends Controller
             ->get();
 
         $structure = Structure::all();
-        return view('abonnement.index', compact('abonnes', 'structure'));
+        return view('abonne.index', compact('abonnes', 'structure'));
     }
 
     public function store(Request $request, Abonnement $abonnement)

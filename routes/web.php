@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReglageController;
 use App\Http\Controllers\SalaireController;
 use App\Http\Controllers\UtilisateurController;
+use App\Http\Controllers\VentilationAbonnementController;
 use App\Http\Controllers\VentilationController;
 use App\Http\Controllers\VentileurController;
 use App\Models\Salaire;
@@ -72,9 +73,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/ajout', [LivreurController::class, 'store'])->name('Livreur.ajouter');
         Route::get('/detail/{livreur}', [LivreurController::class, 'edit'])->name('Livreur.edition');
         Route::put('/detail{livreur}', [LivreurController::class, 'update'])->name('Livreur.update');
-        Route::delete('/{livreur}', [LivreurController::class, 'delete'])->name('Livreur.delete');
+        Route::get('/{livreur}', [LivreurController::class, 'delete'])->name('Livreur.delete');
     });
-    // Abonnement
+    // Abonnés
     Route::prefix('abonnement')->group(function () {
         Route::get('/', [AbonnementController::class, 'index'])->name('Abonnement.index');
         Route::post('/', [AbonnementController::class, 'store'])->name('Abonnement.ajouter');
@@ -82,6 +83,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/update', [AbonnementController::class, 'update'])->name('Abonnement.update');
         Route::get('/delete/{id}', [AbonnementController::class, 'delete'])->name('Abonnement.delete');
     });
+    // Abonnement
+    Route::prefix('abonnements')->group(function () {
+        Route::get('/', [VentilationAbonnementController::class, 'index'])->name('Abonnements.index');
+        Route::post('/', [VentilationAbonnementController::class, 'store'])->name('Abonnements.ajout');
+        Route::get('/edition/{id}', [VentilationAbonnementController::class, 'edition'])->name('Abonnements.edition');
+        Route::post('/update', [VentilationAbonnementController::class, 'update'])->name('Abonnements.update');
+        Route::get('/delete/{id}', [VentilationAbonnementController::class, 'delete'])->name('Abonnements.delete');
+    });
+
     // Utilisateur
     Route::prefix('utilisateur')->group(function () {
         Route::get('/', [UtilisateurController::class, 'index'])->name('Utilisateur.index');

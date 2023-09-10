@@ -14,51 +14,54 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="field-1" class="form-label">Boulangerie</label>
-                                <input type="hidden" class="form-control id" name="id" id="id">
-                                <input type="hidden" class="form-control structure_id" name="structure_id"
-                                    id="structure_id">
-                                <input type="text" class="form-control boulangerie" name="boulangerie" id="boulangerie"
-                                    disabled>
+                                <label for="field-1" class="form-label">Abonné</label>
+                                <select class="form-control @error('structure_id') is-invalid @enderror"
+                                    name="structure_id" id="boulangerie">
+                                    <option selected disabled>Selectionner</option>
+                                    @foreach ($abonnes as $abonnes )
+                                    <option value="{{$abonnes->id}}">{{$abonnes->prenom}} {{$abonnes->nom}}</option>
+                                    @endforeach
+                                </select>
+                                @error('structure_id')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="field-2" class="form-label">Date Abonnement</label>
-                                <input type="date" class="form-control date_abonnement" id="date_abonnement"
-                                    name="date_abonnement" value="{{Carbon\Carbon::now()->toDateString()}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="field-1" class="form-label">Prénom</label>
-                                <input type="text" class="form-control prenom" id="prenom" name="prenom">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="field-2" class="form-label">Nom</label>
-                                <input type="text" class="form-control nom" id="nom" name="nom">
+                                <label for="field-2" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="date_ventilation" name="date_ventilation"
+                                    value="{{Carbon\Carbon::now()->toDateString()}}">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="field-1" class="form-label">Telephone</label>
-                                <input type="number"
-                                    class="form-control telephone @error('telephone') is-invalid @enderror"
-                                    id="telephone" name="telephone">
+                                <label for="field-1" class="form-label">Qté</label>
+                                <input type="number" class="form-control" id="qte" name="qte">
                             </div>
-                            @error('telephone')
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="field-2" class="form-label">Prix</label>
+                                <input type="number" class="form-control" id="pu" name="pu" value="200">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="field-1" class="form-label">Montant</label>
+                                <input type="number" class="form-control @error('montant') is-invalid @enderror"
+                                    id="montant" name="montant">
+                            </div>
+                            @error('montant')
                             <span class="text text-danger">{{$message}}</span>
                             @enderror
                         </div>
 
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Modifier</button>
