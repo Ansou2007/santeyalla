@@ -35,10 +35,18 @@ return [
             'root' => storage_path('app'),
             'throw' => false,
         ],
+        // Backup Local
         'backup' => [
             'driver' => 'local',
             'root' => storage_path('app/sauvegarde'),
             'throw' => false,
+        ],
+        // Dropbox backup
+        'dropbox' => [
+            'driver' => 'dropbox',
+            'key' => env('DROPBOX_APP_KEY'),
+            'authorization_token' => env('DROPBOX_AUTH_TOKEN'),
+            'appSecret' => env('DROPBOX_APP_SECRET'),
         ],
 
         'public' => [
