@@ -1,11 +1,11 @@
 <!-- Modal -->
-<form id="ajoutForm" method="post" class="ajoutForm">
+<form action="" id="ajoutForm" method="post" class="ajoutForm">
     @csrf
     <div class="modal fade" id="ajoutAbonnement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajout Abonnement</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout Petrin</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -13,24 +13,23 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="field-1" class="form-label">Abonné</label>
-                                <select class="form-control @error('abonnement_id') is-invalid @enderror"
-                                    name="abonnement_id" id="abonnement_id" required>
+                                <label for="field-1" class="form-label">Boulangerie</label>
+                                <select class="form-control @error('structure_id') is-invalid @enderror"
+                                    name="structure_id" id="boulangerie">
                                     <option selected disabled>Selectionner</option>
-                                    @foreach ($abonnes as $abonnes )
-                                    <option value="{{$abonnes->id}}">{{$abonnes->prenom}}
-                                        {{$abonnes->nom}}->{{$abonnes->nom_complet}}</option>
+                                    @foreach ($structure as $structure )
+                                    <option value="{{$structure->id}}">{{$structure->nom_complet}}</option>
                                     @endforeach
                                 </select>
-                                @error('abonnement_id')
+                                @error('structure_id')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="field-2" class="form-label">Date</label>
-                                <input type="date" class="form-control" id="date_ventilation" name="date_ventilation"
+                                <label for="field-2" class="form-label">Date Petrin</label>
+                                <input type="date" class="form-control" id="date_abonnement" name="date_abonnement"
                                     value="{{Carbon\Carbon::now()->toDateString()}}">
                             </div>
                         </div>
@@ -38,24 +37,25 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="field-1" class="form-label">Qté</label>
-                                <input type="text" class="form-control" id="qte" name="qte">
+                                <label for="field-1" class="form-label">Sac</label>
+                                <input type="text" class="form-control" id="nbre_sac" name="nbre_sac">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="field-2" class="form-label">Prix</label>
-                                <input type="number" class="form-control" id="pu" name="pu" value="200">
+                                <label for="field-2" class="form-label">Nom</label>
+                                <input type="text" class="form-control" id="qte_produit" name="qte_produit">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <input type="hidden" class="form-control @error('montant') is-invalid @enderror"
-                                    id="montant" name="montant">
+                                <label for="field-1" class="form-label">Rendement</label>
+                                <input type="number" class="form-control @error('rendement') is-invalid @enderror"
+                                    id="rendement" name="rendement">
                             </div>
-                            @error('montant')
+                            @error('telephone')
                             <span class="text text-danger">{{$message}}</span>
                             @enderror
                         </div>

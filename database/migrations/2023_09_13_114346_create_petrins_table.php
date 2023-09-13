@@ -11,16 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ventilation__abonnements', function (Blueprint $table) {
+        Schema::create('petrins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('abonnement_id')->constrained();
-            $table->date('date_ventilation');
-            $table->float('qte');
-            $table->integer('pu');
-            $table->integer('montant');
+            $table->foreignId('structure_id')->constrained();
+            $table->float('nbre_sac');
+            $table->float('rendement');
+            $table->float('qte_produit');
+            $table->date('date_petrin');
+            $table->string('status', 50);
             $table->timestamps();
         });
-        schema::enableForeignKeyConstraints();
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ventilation__abonnements');
+        Schema::dropIfExists('petrins');
     }
 };

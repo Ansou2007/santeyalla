@@ -4,6 +4,7 @@ use App\Http\Controllers\AbonnementController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeController;
 use App\Http\Controllers\LivreurController;
+use App\Http\Controllers\PetrinController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReglageController;
 use App\Http\Controllers\SalaireController;
@@ -53,7 +54,7 @@ require __DIR__ . '/auth.php';
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'index'])->name('Admin.Dashboard');
     // Ventilation
-    Route::prefix('ventilation')->group(function () {
+    Route::prefix('admin/ventilation')->group(function () {
         Route::get('/', [VentilationController::class, 'index'])->name('Ventilation.index');
         Route::get('/ajout', [VentilationController::class, 'create'])->name('Ventilation.ajout');
         Route::post('/ajout', [VentilationController::class, 'store'])->name('Ventilation.ajouter');
@@ -67,7 +68,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/pdf', [VentilationController::class, 'generate_pdf'])->name("Ventilation.pdf");
     });
     // Livreur
-    Route::prefix('livreur')->group(function () {
+    Route::prefix('admin/livreur')->group(function () {
         Route::get('/', [LivreurController::class, 'index'])->name('Livreur.index');
         Route::get('/ajout', [LivreurController::class, 'create'])->name('Livreur.ajout');
         Route::post('/ajout', [LivreurController::class, 'store'])->name('Livreur.ajouter');
@@ -76,7 +77,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/{livreur}', [LivreurController::class, 'delete'])->name('Livreur.delete');
     });
     // Abonnés
-    Route::prefix('abonnement')->group(function () {
+    Route::prefix('admin/abonnement')->group(function () {
         Route::get('/', [AbonnementController::class, 'index'])->name('Abonnement.index');
         Route::post('/', [AbonnementController::class, 'store'])->name('Abonnement.ajouter');
         Route::get('/edition/{id}', [AbonnementController::class, 'edition'])->name('Abonnement.edition');
@@ -84,16 +85,24 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/delete/{id}', [AbonnementController::class, 'delete'])->name('Abonnement.delete');
     });
     // Abonnement
-    Route::prefix('abonnements')->group(function () {
+    Route::prefix('admin/abonnements')->group(function () {
         Route::get('/', [VentilationAbonnementController::class, 'index'])->name('Abonnements.index');
         Route::post('/', [VentilationAbonnementController::class, 'store'])->name('Abonnements.ajout');
         Route::get('/edition/{id}', [VentilationAbonnementController::class, 'edition'])->name('Abonnements.edition');
         Route::post('/update', [VentilationAbonnementController::class, 'update'])->name('Abonnements.update');
         Route::get('/delete/{id}', [VentilationAbonnementController::class, 'delete'])->name('Abonnements.delete');
     });
+    // Petrin
+    Route::prefix('admin/pretrin')->group(function () {
+        Route::get('/', [PetrinController::class, 'index'])->name('Petrin.index');
+        Route::post('/', [PetrinController::class, 'store'])->name('Petrin.ajout');
+        Route::get('/edition/{id}', [PetrinController::class, 'edition'])->name('Petrin.edition');
+        Route::post('/update', [PetrinController::class, 'update'])->name('Petrin.update');
+        Route::get('/delete/{id}', [PetrinController::class, 'delete'])->name('Petrin.delete');
+    });
 
     // Utilisateur
-    Route::prefix('utilisateur')->group(function () {
+    Route::prefix('admin/utilisateur')->group(function () {
         Route::get('/', [UtilisateurController::class, 'index'])->name('Utilisateur.index');
         Route::get('/ajout', [UtilisateurController::class, 'create'])->name('Utilisateur.ajout');
         Route::post('/ajout', [UtilisateurController::class, 'store'])->name('Utilisateur.ajouter');
@@ -102,18 +111,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/{utilisateur}', [UtilisateurController::class, 'delete'])->name('Utilisateur.supprimer');
     });
     // Employe
-    Route::prefix('employe')->group(function () {
+    Route::prefix('admin/employe')->group(function () {
         Route::get('/', [EmployeController::class, 'index'])->name('Employe.index');
         Route::get('/ajout', [EmployeController::class, 'create'])->name('Employe.ajout');
     });
     // Salaire
-    Route::prefix('salaire')->group(function () {
+    Route::prefix('admin/salaire')->group(function () {
         Route::get('/', [SalaireController::class, 'index'])->name('Salaire.index');
         Route::get('/ajout', [SalaireController::class, 'create'])->name('Salaire.ajout');
     });
 
     // Reglage
-    Route::prefix('reglage')->group(function () {
+    Route::prefix('admin/reglage')->group(function () {
         Route::get('/', [ReglageController::class, 'index'])->name('Reglage.index');
         Route::get('/create', [ReglageController::class, 'create'])->name('Reglage.ajout');
         Route::post('/create', [ReglageController::class, 'store'])->name('Reglage.ajouter');
@@ -123,17 +132,25 @@ Route::middleware(['auth', 'admin'])->group(function () {
 // ROLE VENTILEUR
 Route::middleware(['auth', 'ventileur'])->group(function () {
     Route::get('ventileur/dashboard', [VentileurController::class, 'dashboard'])->name('Ventileur.Dashboard');
-    // Route::get('ventilation', [VentilationController::class, 'index'])->name('Ventilation.index');
-    /*  Route::get('ventilation/detail/{ventilation}', [VentilationController::class, 'detail'])->name('Ventilation.detail');
-    Route::get('ventilation/edition/{ventilation}', [VentilationController::class, 'edit'])->name('Ventilation.edition');
-    Route::get('ventilation/ajout', [VentilationController::class, 'create'])->name('Ventilation.ajout');
-    Route::post('ventilation/ajout', [VentilationController::class, 'store'])->name('Ventilation.ajouter');
-    Route::get('livreur', [LivreurController::class, 'index'])->name('Livreur.index');
+    Route::prefix('ventileur/')->group(function () {
+        Route::get('ventilation', [VentilationController::class, 'index'])->name('Ventileur_ventilation.index');
+        Route::get('ventilation/detail/{ventilation}', [VentilationController::class, 'detail'])->name('Ventileur_ventilation.detail');
+        Route::get('ventilation/edition/{ventilation}', [VentilationController::class, 'edit'])->name('Ventileur_ventilation.edition');
+        Route::get('ventilation/ajout', [VentilationController::class, 'create'])->name('Ventileur_ventilation.ajout');
+        Route::post('ventilation/ajout', [VentilationController::class, 'store'])->name('Ventileur_ventilation.ajouter');
+    });
+
+    Route::prefix('ventileur/livreur')->group(function () {
+        Route::get('livreur', [LivreurController::class, 'index'])->name('Ventileur_livreur.index');
+    });
+    /*  
     Route::get('utilisateur/profil', [UtilisateurController::class, 'profile'])->name('Utilisateur.profil'); */
 });
 
 // ROLE LIVREUR
 Route::middleware(['auth', 'livreur'])->group(function () {
     Route::get('livreur/dashboard', [LivreurController::class, 'dashboard'])->name('Livreur.Dashboard');
-    // Route::get('utilisateur/profil', [UtilisateurController::class, 'profile'])->name('Utilisateur.profil');
+    Route::prefix('livreur/')->group(function () {
+        Route::get('utilisateur/profil', [UtilisateurController::class, 'profile'])->name('Utilisateur.profil');
+    });
 });
