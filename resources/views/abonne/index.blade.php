@@ -64,9 +64,7 @@
     $(document).ready(function(){
 
 
-                @if (session()->has('Message'))
-                    Swal.fire('Abonnement',"{{session()->get('Message')}}",'info');
-                @endif
+                
 
                  $('.BtnAjouter').on('click',function(e){
                         e.preventDefault();

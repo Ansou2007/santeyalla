@@ -2,7 +2,7 @@
 <form id="EditionForm" class="EditionForm">
     @csrf
     @method('put')
-    <div class="modal fade" id="editionVentilation" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade editionVentilation" id="editionVentilation" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -18,7 +18,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="" class="form-label">Livreur</label>
-                                <input type="text" class="form-control Livreur" id="Livreur" name="livreur">
+                                <input type="text" class="form-control Livreur" id="Livreur" name="livreur" disabled>
                             </div>
                         </div>
                         <div class="col-md-6">

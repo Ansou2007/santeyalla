@@ -91,8 +91,7 @@ class VentilationController extends Controller
             "montant_a_verse" => $request->montant_a_verse,
             "reliquat" => $request->reliquat,
         ]);
-
-        return back()->with('Message', 'Ventilation ajouté avec success');
+        return back()->with('success', 'Ventilation ajouté avec success');
     }
     // Detail Ventilation
     public function detail(Ventilation $ventilation)
@@ -152,7 +151,9 @@ class VentilationController extends Controller
             "montant_a_verse" => $request->montant_a_verse,
             "reliquat" => $request->reliquat,
         ]);
-        // return back()->with('Message', 'Ventilation modifiée avec success');
+
+        //return back()->with('success', 'Ventilation modifiée avec success');
+        //return back();
     }
 
     // suppression
@@ -160,7 +161,7 @@ class VentilationController extends Controller
     {
         $ventilation = Ventilation::find($id);
         $ventilation->delete();
-        return back()->with('Message', 'Ventilation supprimée avec success');
+        return back()->with('success', 'Ventilation supprimée avec success');
     }
 
     // Page des Rapports de ventilation
@@ -177,12 +178,15 @@ class VentilationController extends Controller
         $livreur = Livreur::all();
         $boulangerie = Structure::all();
         $filtre_livreur = $request->livreur_id;
-        $filtre_strcuture = $request->boulangerie;
+        $filtre_structure = $request->boulangerie;
+        $date_debut = $request->date_debut;
+        $date_fin = $request->date_fin;
         $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
             ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
             ->select('ventilations.*', 'livreurs.matricule', 'livreurs.prenom', 'livreurs.nom', 'livreurs.telephone', 'livreurs.taux', 'structures.nom_complet')
             ->where('livreur_id', $filtre_livreur)
-            ->where('nom_complet', $filtre_strcuture)
+            ->where('nom_complet', $filtre_structure)
+            ->whereBetween('date_ventilation', [$date_debut, $date_fin])
             ->orderBy('date_ventilation', 'desc')
             ->get();
         if ($ventilation->count() > 0) {

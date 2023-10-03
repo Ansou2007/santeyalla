@@ -51,8 +51,8 @@ class LivreurController extends Controller
                 "numeroPiece" => $request->numeroPiece,
                 "photo" => $request->photo
             ]);
-
-            return back()->with("Message", "Livreur ajouté avec succés");
+            toastr()->success('Ajout avec success');
+            return back();
         }
     }
 
@@ -85,7 +85,8 @@ class LivreurController extends Controller
             "numeroPiece" => $request->numeroPiece,
             "photo" => $request->photo
         ]);
-        return back()->with("Message", "Livreur modifié avec succés");
+        toastr()->success('Livreur modifié avec succés');
+        return back();
     }
 
     // Suppression
@@ -94,5 +95,7 @@ class LivreurController extends Controller
     {
         $livreur = Livreur::find($id);
         $livreur->delete();
+        toastr()->success('Livreur supprimé avec success');
+        return back();
     }
 }

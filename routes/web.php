@@ -84,20 +84,20 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/update', [AbonnementController::class, 'update'])->name('Abonnement.update');
         Route::get('/delete/{id}', [AbonnementController::class, 'delete'])->name('Abonnement.delete');
     });
-    // Abonnement
+    // Abonnements
     Route::prefix('admin/abonnements')->group(function () {
         Route::get('/', [VentilationAbonnementController::class, 'index'])->name('Abonnements.index');
         Route::post('/', [VentilationAbonnementController::class, 'store'])->name('Abonnements.ajout');
         Route::get('/edition/{id}', [VentilationAbonnementController::class, 'edition'])->name('Abonnements.edition');
-        Route::post('/update', [VentilationAbonnementController::class, 'update'])->name('Abonnements.update');
+        Route::put('/{id}/update/', [VentilationAbonnementController::class, 'update'])->name('Abonnements.update');
         Route::get('/delete/{id}', [VentilationAbonnementController::class, 'delete'])->name('Abonnements.delete');
     });
     // Petrin
-    Route::prefix('admin/pretrin')->group(function () {
+    Route::prefix('admin/petrin')->group(function () {
         Route::get('/', [PetrinController::class, 'index'])->name('Petrin.index');
         Route::post('/', [PetrinController::class, 'store'])->name('Petrin.ajout');
         Route::get('/edition/{id}', [PetrinController::class, 'edition'])->name('Petrin.edition');
-        Route::post('/update', [PetrinController::class, 'update'])->name('Petrin.update');
+        Route::put('/update', [PetrinController::class, 'update'])->name('Petrin.update');
         Route::get('/delete/{id}', [PetrinController::class, 'delete'])->name('Petrin.delete');
     });
 

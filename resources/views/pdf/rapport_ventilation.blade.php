@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Rapport</title>
@@ -11,21 +12,35 @@
             padding: 10px;
             font-family: sans-serif;
         }
-        h1,h2,h3,h4,h5,h6,p,span,label {
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        span,
+        label {
             font-family: sans-serif;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 0px !important;
         }
+
         table thead th {
             height: 28px;
             text-align: left;
             font-size: 16px;
             font-family: sans-serif;
         }
-        table, th, td {
+
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             font-size: 14px;
@@ -37,18 +52,22 @@
             margin-bottom: 12px;
             font-family: sans-serif;
         }
+
         .small-heading {
             font-size: 18px;
             font-family: sans-serif;
         }
+
         .total-heading {
             font-size: 18px;
             font-weight: 700;
             font-family: sans-serif;
         }
+
         .order-details tbody tr td:nth-child(1) {
             width: 20%;
         }
+
         .order-details tbody tr td:nth-child(3) {
             width: 20%;
         }
@@ -56,12 +75,15 @@
         .text-start {
             text-align: left;
         }
+
         .text-end {
             text-align: right;
         }
+
         .text-center {
             text-align: center;
         }
+
         .company-data span {
             margin-bottom: 4px;
             display: inline-block;
@@ -69,22 +91,26 @@
             font-size: 14px;
             font-weight: 400;
         }
+
         .no-border {
             border: 1px solid #fff !important;
         }
+
         .bg-blue {
             background-color: #414ab1;
             color: #fff;
         }
     </style>
 </head>
+
 <body>
 
     <table class="order-details">
         <thead>
             <tr>
                 <th width="50%" colspan="2">
-                    <img src="{{public_path('img/logo_santeyalla.jpeg')}}" alt="" height="100px" width="100px" style="border-radius: 13px solid">
+                    <img src="{{public_path('img/logo_santeyalla.jpeg')}}" alt="" height="80px" width="80px"
+                        style="border-radius: 13px solid">
                     <h3 class="text-start">Boulangerie {{$ventilation->value('nom_complet')}}</h3>
                 </th>
                 <th width="50%" colspan="2" class="text-end company-data">
@@ -127,7 +153,7 @@
                 <td>telephone:</td>
                 <td>{{$ventilation->value('telephone')}}</td>
             </tr>
-        
+
         </tbody>
     </table>
 
@@ -150,7 +176,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($ventilation as $ventilation )           
+            @foreach ($ventilation as $ventilation )
             <tr>
                 <td width="5%">{{$loop->index+1}}</td>
                 <td width="15%">{{Carbon\Carbon::parse($ventilation->date_ventilation)->format('d-m-Y')}}</td>
@@ -162,18 +188,20 @@
                 <td width="15%" class="fw-bold">{{$ventilation->reliquat}}</td>
             </tr>
             @endforeach
-            
+
             <tr>
                 <td colspan="4" class="total-heading">Total </td>
-                <td colspan="1" class="total-heading">14699</td>
+                <td colspan="1" class="total-heading">0</td>
+                <td colspan="1" class="total-heading">0</td>
+                <td colspan="1" class="total-heading">0</td>
+                <td colspan="1" class="total-heading">0</td>
+
             </tr>
         </tbody>
     </table>
 
-    <br>
-    <p class="text-center">
-        Merci pour la confiance
-    </p>
+
 
 </body>
+
 </html>

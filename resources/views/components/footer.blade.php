@@ -14,5 +14,7 @@
 <script src="{{asset('plugins/apexchart/apexcharts.min.js')}}"></script>
 <script src="{{asset('plugins/apexchart/chart-data.js')}}"></script>
 <script src="{{asset('js/script.js')}}"></script>
+
 </body>
+
 </html>

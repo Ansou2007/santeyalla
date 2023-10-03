@@ -2,7 +2,8 @@
 
 <!-- Modal -->
 <form action="" id="DetailForm">
-    <div class="modal fade" id="detailVentilation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade detailVentilation" id="detailVentilation" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

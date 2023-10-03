@@ -18,7 +18,7 @@ return new class extends Migration
             $table->float('rendement');
             $table->float('qte_produit');
             $table->date('date_petrin');
-            $table->string('status', 50);
+            $table->string('status', 50)->nullable();
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();

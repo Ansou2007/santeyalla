@@ -32,7 +32,7 @@
                         <td>{{$loop->index + 1}}</td>
                         <td> {{carbon\Carbon::parse($petrin->date_abonnement)->format('d-m-Y')}}</td>
                         <td>{{$petrin->nbre_sac}}</td>
-                        <td>{{$petrin->nom_complet}} </td>
+                        <td>{{$petrin->structures->nom_complet}} </td>
                         <td><span class="">{{$petrin->qte_produit}}</span> </td>
                         <td><span class="">{{$petrin->rendement}}</span> </td>
                         <td><span class="">{{$petrin->status}}</span> </td>
@@ -75,18 +75,18 @@
                  $('.BtnAjouter').on('click',function(e){
                         e.preventDefault();
                     // alert('coucou');
-                    $('#ajoutAbonnement').modal('show');                 
+                    $('#ajoutPetrin').modal('show');                 
                 }); 
                 // Envois
                 $('.ajoutForm').on('submit',function(e){
                     e.preventDefault();
                     var donnees = $(this).serialize();
                     $.ajax({
-                        url:"{{route('Abonnement.ajouter')}}",
+                        url:"{{route('Petrin.ajout')}}",
                         method:'post',
                         data:donnees,
                         success:function(data){
-                            $('#ajoutAbonnement').modal('show'); 
+                            $('#ajoutPetrin').modal('show'); 
                             window.location.reload();                
                            // console.log(data);
                         },error:function(data){

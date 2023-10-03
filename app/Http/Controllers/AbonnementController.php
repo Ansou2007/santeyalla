@@ -39,7 +39,7 @@ class AbonnementController extends Controller
                 "telephone" => $request->telephone
             ]
         );
-        return redirect()->back()->with('Message', "Abonné ajouté");
+        return redirect()->back()->with('success', "Abonné ajouté");
     }
 
     public function edition($id)
@@ -70,7 +70,7 @@ class AbonnementController extends Controller
         $abonnement->date_abonnement = $request->input('date_abonnement');
         $abonnement->save();
 
-        return redirect()->back()->with('Message', 'Abonné modifié');
+        return redirect()->back()->with('success', 'Abonné modifié');
     }
 
     // Suppression
@@ -79,6 +79,6 @@ class AbonnementController extends Controller
     {
         $abonnement = Abonnement::find($id);
         $abonnement->delete();
-        return back()->with('Message', 'Abonné supprimé avec success');
+        return redirect()->back()->with('success', 'Abonné supprimé');
     }
 }

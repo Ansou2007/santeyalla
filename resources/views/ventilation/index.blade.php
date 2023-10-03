@@ -246,7 +246,7 @@
                         data:donnees,
                         method:"put",
                         success:function(data){
-                            Swal.fire('Ventilation','Ventilation modifié','info');
+                            //Swal.fire('Ventilation','Ventilation modifié','info');
                             window.location.reload();
                         },
                         error:function(error){

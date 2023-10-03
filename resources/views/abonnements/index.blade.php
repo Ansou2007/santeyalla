@@ -50,8 +50,6 @@
                                         data-url="{{route('Abonnements.delete',$abonnement->id)}}"
                                         class="BtnSupprimer dropdown-item btn btn-link" id="supprimer"><i
                                             class="fas fa-trash"></i>Supprimer</a>
-
-
                                 </div>
                             </div>
                         </td>
@@ -98,12 +96,12 @@
                     $.get(url,function(data){
                         //console.log(data);
                         $('.id').val(data.id);
-                        $('.structure_id').val(data.structure_id);
-                        $('.boulangerie').val(data.nom_complet);
-                        $('.prenom').val(data.prenom);
-                        $('.nom').val(data.nom);
-                        $('.telephone').val(data.telephone);
-                        $('.date_abonnement').val(data.date_abonnement);
+                        $('.abonnement_id').val(data.abonnement_id);
+                        $('.prenom').val(data.prenom+' '+ data.nom);
+                        //$('.nom').val(data.nom);
+                        $('.qte').val(data.qte);
+                        $('.pu').val(data.pu);
+                        $('.date_ventilation').val(data.date_ventilation);
                         $('#editAbonnement').modal('show'); 
                     });
 
@@ -113,7 +111,7 @@
                         e.preventDefault();
                         var id=$('.id').val();
                         var donnees = $(this).serialize();
-                    var url = "{{route('Abonnement.update',':id')}}";
+                    var url = "{{route('Abonnements.update',':id')}}";
                     url = url.replace(':id',id);
                     $.ajax({
                         url:url,
@@ -121,10 +119,12 @@
                         method:"post",
                         success:function(data){
                             //alert('ajout avec success');
-                            Swal.fire('Ventilation',"{{session()->get('Message')}}",'info');
-                            window.location.reload();
+                           // Swal.fire('Ventilation',"{{session()->get('Message')}}",'info');
+                           console.log(url);
+                            //window.location.reload();
                         },error:function(data){
                             alert('erreur');
+                            console.log(url);
 
                         }
                     });                  
@@ -132,7 +132,7 @@
                 // Suppression
                 $('.BtnSupprimer').on('click',function(e){
                     e.preventDefault();
-                    var id = $(this).attr('data-id');
+                   // var id = $(this).attr('data-id');
                     var url = $(this).attr('data-url');
                     Swal.fire({
                     title: 'Voulez-vous supprimer ?',
