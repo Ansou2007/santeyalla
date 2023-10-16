@@ -49,12 +49,20 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-//==============Commun=================================
+//==============COMMUN=================================
 
 Route::middleware('auth')->group(function () {
     Route::get('/detail/{id}', [VentilationController::class, 'detail_modal'])->name('Ventilation.detail');
     Route::get('Ventilation/edit/{id}', [VentilationController::class, 'edit_modal'])->name('Ventilation.edition');
     Route::put('Ventilation/edition/{ventilation}', [VentilationController::class, 'update'])->name('Ventilation.update');
+    Route::post('ventilation/search', [VentilationController::class, 'search'])->name("Ventilation.search");
+    // Livreur
+    Route::get('/livreur', [LivreurController::class, 'index'])->name('Livreur.index');
+    Route::get('livreur/ajout', [LivreurController::class, 'create'])->name('Livreur.ajout');
+    Route::post('livreur/ajout', [LivreurController::class, 'store'])->name('Livreur.ajouter');
+    Route::get('livreur/detail/{livreur}', [LivreurController::class, 'edit'])->name('Livreur.edition');
+    Route::put('livreur/detail{livreur}', [LivreurController::class, 'update'])->name('Livreur.update');
+    Route::get('livreur/{livreur}', [LivreurController::class, 'delete'])->name('Livreur.delete');
 });
 
 //=================== ROLE ADMIN===========================
@@ -70,18 +78,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
         // Route::put('/edition/{ventilation}', [VentilationController::class, 'update'])->name('Ventilation.update');
         // Route::get('/edit/{id}', [VentilationController::class, 'edit_modal'])->name('Ventilation.edition');
         Route::get('delete/{id}', [VentilationController::class, 'delete'])->name('Ventilation.delete');
-        Route::post('/search', [VentilationController::class, 'search'])->name("Ventilation.search");
+        // Route::post('/search', [VentilationController::class, 'search'])->name("Ventilation.search");
         Route::get('/rapport', [VentilationController::class, 'rapport'])->name("Ventilation.rapport");
         Route::post('/pdf', [VentilationController::class, 'generate_pdf'])->name("Ventilation.pdf");
     });
     // Livreur
     Route::prefix('admin/livreur')->group(function () {
-        Route::get('/', [LivreurController::class, 'index'])->name('Livreur.index');
-        Route::get('/ajout', [LivreurController::class, 'create'])->name('Livreur.ajout');
-        Route::post('/ajout', [LivreurController::class, 'store'])->name('Livreur.ajouter');
-        Route::get('/detail/{livreur}', [LivreurController::class, 'edit'])->name('Livreur.edition');
-        Route::put('/detail{livreur}', [LivreurController::class, 'update'])->name('Livreur.update');
-        Route::get('/{livreur}', [LivreurController::class, 'delete'])->name('Livreur.delete');
+        // Route::get('/', [LivreurController::class, 'index'])->name('Livreur.index');
+        // Route::get('/ajout', [LivreurController::class, 'create'])->name('Livreur.ajout');
+        // Route::post('/ajout', [LivreurController::class, 'store'])->name('Livreur.ajouter');
+        // Route::get('/detail/{livreur}', [LivreurController::class, 'edit'])->name('Livreur.edition');
+        //Route::put('/detail{livreur}', [LivreurController::class, 'update'])->name('Livreur.update');
+        //Route::get('/{livreur}', [LivreurController::class, 'delete'])->name('Livreur.delete');
     });
     // Abonnés
     Route::prefix('admin/abonnement')->group(function () {

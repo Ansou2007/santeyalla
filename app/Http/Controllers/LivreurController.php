@@ -16,13 +16,25 @@ class LivreurController extends Controller
     }
     public function index()
     {
-        $livreur = Livreur::all();
-        return view('livreur.index', compact('livreur'));
+        if (auth()->user()->role == 'Admin') {
+            $livreur = Livreur::all();
+            return view('livreur.index', compact('livreur'));
+        } else {
+            $id_boulangerie = auth()->user()->structure_id;
+            $livreur = Livreur::where('structure_id', $id_boulangerie)->get();
+            return view('livreur.index', compact('livreur'));
+        }
     }
     public function create()
     {
-        $structure = Structure::all();
-        return view('livreur.ajout', compact('structure'));
+        if (auth()->user()->role == 'Admin') {
+            $structure = Structure::all();
+            return view('livreur.ajout', compact('structure'));
+        } else {
+            $id_boulangerie = auth()->user()->structure_id;
+            $structure = Structure::where('id', $id_boulangerie)->get();
+            return view('livreur.ajout', compact('structure'));
+        }
     }
     public function store(Request $request, Livreur $livreur)
     {

@@ -30,8 +30,8 @@
                 <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span>Livreur</span> <span
                         class="menu-arrow"></span></a>
                 <ul>
-                    <li><a href="{{route('Ventileur_livreur.index')}}">Liste Livreur</a></li>
-                    <li><a href="">Ajouter Livreur</a></li>
+                    <li><a href="{{route('Livreur.index')}}">Liste Livreur</a></li>
+                    <li><a href="{{route('Livreur.ajout')}}">Ajouter Livreur</a></li>
                 </ul>
             </li>
             {{-- Abonnement --}}
