@@ -126,26 +126,22 @@
                                     {{--Voir--}}
                                     <a href="javascript::void(0)" type="button" class="dropdown-item   btnDetail"
                                         data-id="{{$ventilation->id}}"
-                                        data-attr="{{ route('Ventilation.detail', $ventilation->id) }}"><i
-                                            class="far fa-eye me-2">&nbspVoir</i></a>
+                                        data-attr="{{ route('Ventilation.detail', $ventilation->id)}}">
+                                        <i class="far fa-eye me-2">&nbspVoir</i></a>
+                                    {{-- Editer --}}
                                     <a href="javascript::void(0)" type="button" class="dropdown-item btnEdition"
-                                        data-id="{{$ventilation->id}}"
-                                        data-attr="{{ route('Ventilation.edition', $ventilation->id)}}"
-                                        data-site="{{ route('Ventilation.update', $ventilation->id)}}"><i
+                                        data-id="{{$ventilation->id}}" data-attr="
+                                        {{ route('Ventilation.edition', $ventilation->id)}}" data-url="
+                                        {{ route('Ventilation.update', $ventilation->id)}}"><i
                                             class="far fa-edit me-2">&nbspEditer</i></a>
                                     {{--Supprimer--}}
-                                    {{-- <form
-                                        action="{{route('Ventilation.delete',['ventilation'=>$ventilation->id])}}"
-                                        method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn dropdown-item" type="submit"><i
-                                                class="fas fa-trash me-2"></i>Supprimer</button>
-                                    </form> --}}
+                                    @can('Administrateur')
                                     <a href="javascript::void(0)" data-id="{{$ventilation->id}}"
                                         data-url="{{route('Ventilation.delete',$ventilation->id)}}"
                                         class="BtnSupprimer dropdown-item" id="supprimer"><i
                                             class="fas fa-trash me-2"></i>Supprimer</a>
+                                    @endcan
+
                                 </div>
                             </div>
                         </td>

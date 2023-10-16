@@ -13,15 +13,30 @@ class VentilationController extends Controller
 {
     public function index()
     {
-        $livreur = Livreur::all();
-        $boulangerie = Structure::all();
-        $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
-            ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
-            ->select('ventilations.*', 'livreurs.prenom', 'livreurs.nom', 'structures.nom_complet')
-            ->where('ventilations.status', 'Actif')
-            ->orderBy('date_ventilation', 'desc')
-            ->get();
-        return view('ventilation.index', compact('ventilation', 'livreur', 'boulangerie'));
+        if (auth()->user()->role == 'Ventileur') {
+            $id_boulangerie = auth()->user()->structure_id;
+            $livreur = Livreur::where('structure_id', $id_boulangerie)->get();
+            // $boulangerie = Structure::all();
+            $boulangerie = Structure::where('id', $id_boulangerie)->get();
+            $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
+                ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
+                ->select('ventilations.*', 'livreurs.prenom', 'livreurs.nom', 'structures.nom_complet')
+                ->where('ventilations.status', 'Actif')
+                ->where('structure_id', $id_boulangerie)
+                ->orderBy('date_ventilation', 'desc')
+                ->get();
+            return view('ventilation.index', compact('ventilation', 'livreur', 'boulangerie'));
+        } else {
+            $livreur = Livreur::all();
+            $boulangerie = Structure::all();
+            $ventilation = Ventilation::join('livreurs', 'livreurs.id', '=', 'ventilations.livreur_id')
+                ->join('structures', 'structures.id', '=', 'livreurs.structure_id')
+                ->select('ventilations.*', 'livreurs.prenom', 'livreurs.nom', 'structures.nom_complet')
+                ->where('ventilations.status', 'Actif')
+                ->orderBy('date_ventilation', 'desc')
+                ->get();
+            return view('ventilation.index', compact('ventilation', 'livreur', 'boulangerie'));
+        }
     }
 
     // Recherche
@@ -55,8 +70,14 @@ class VentilationController extends Controller
     // Page Ajout Ventilation
     public function create(User $user)
     {
-        $livreurs = Livreur::all();
-        return view('ventilation.ajout', compact('livreurs'));
+        if (auth()->user()->role == 'Ventileur') {
+            $id_boulangerie = auth()->user()->structure_id;
+            $livreurs = Livreur::where('structure_id', $id_boulangerie)->get();
+            return view('ventilation.ajout', compact('livreurs'));
+        } else {
+            $livreurs = Livreur::all();
+            return view('ventilation.ajout', compact('livreurs'));
+        }
     }
 
 

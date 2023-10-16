@@ -1,7 +1,7 @@
 {{-- Modal Edition--}}
 <form id="EditionForm" class="EditionForm">
     @csrf
-    @method('put')
+    @method('get')
     <div class="modal fade editionVentilation" id="editionVentilation" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
