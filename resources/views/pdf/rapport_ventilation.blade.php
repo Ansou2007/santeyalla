@@ -120,7 +120,7 @@
                 </th>
             </tr>
             <tr class="bg-blue">
-                <th width="50%" colspan="2">Commission</th>
+                <th width="50%" colspan="2">Détail</th>
                 <th width="50%" colspan="2">Livreur</th>
             </tr>
         </thead>
@@ -134,23 +134,26 @@
             </tr>
             <tr>
                 <td>Montant Commision:</td>
-                <td>XXXXXXX</td>
+                <td></td>
+                @php
+                $taux = $ventilation->value('taux')
+                @endphp
 
                 <td>Prénom:</td>
-                <td>{{$ventilation->value('prenom')}}</td>
+                <td>{{strtoupper($ventilation->value('prenom'))}}</td>
             </tr>
             <tr>
-                <td>Ordered Date:</td>
-                <td>22-09-2022 10:54 AM</td>
+                <td>Imprimé le:</td>
+                <td>{{carbon\Carbon::now()->format('d-m-Y')}}</td>
 
                 <td>Nom:</td>
-                <td>{{$ventilation->value('nom')}}</td>
+                <td>{{strtoupper($ventilation->value('nom'))}}</td>
             </tr>
             <tr>
                 <td>Mode Paiement:</td>
-                <td>Cash on Delivery</td>
+                <td>Comptant</td>
 
-                <td>telephone:</td>
+                <td>Telephone:</td>
                 <td>{{$ventilation->value('telephone')}}</td>
             </tr>
 
@@ -213,6 +216,11 @@
                 <td colspan="1" class="total-heading">{{$vendue}}</td>
                 <td colspan="1" class="total-heading">{{$versement}}</td>
                 <td colspan="1" class="total-heading">{{$reliquat}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="total-heading">Commission </td>
+                <td colspan="1" class="total-heading">{{$vendue * $taux }}</td>
+
 
             </tr>
         </tbody>
