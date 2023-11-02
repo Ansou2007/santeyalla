@@ -76,7 +76,9 @@
                 });
                 // Fin Suppression
                 
-                $('.livreur').DataTable();
+                $('.livreur').DataTable({
+                    'pageLength'    : 100,
+                });
 
                 //toastr.success('coucou');
 

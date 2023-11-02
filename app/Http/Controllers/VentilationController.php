@@ -212,8 +212,8 @@ class VentilationController extends Controller
             ->get();
         if ($ventilation->count() > 0) {
             $pdf = PDF::loadView('pdf.rapport_ventilation', compact('ventilation'));
-            return $pdf->download('ventilation.pdf');
-            //return $pdf->stream();
+            // return $pdf->download('ventilation.pdf');
+            return $pdf->stream();
         } else {
             return view('ventilation.rapport', compact('boulangerie', 'livreur'))->with('Message', 'Aucune données trouvée');
         }

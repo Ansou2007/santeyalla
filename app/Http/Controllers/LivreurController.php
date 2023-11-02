@@ -107,7 +107,7 @@ class LivreurController extends Controller
     {
         $livreur = Livreur::find($id);
         $livreur->delete();
-        toastr()->success('Livreur supprimé avec success');
-        return back();
+        // toastr()->success('Livreur supprimé avec success');
+        return back()->with('success', 'Livreur supprimé avec success');
     }
 }

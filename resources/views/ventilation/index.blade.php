@@ -332,6 +332,7 @@
 
                 //Chargement datatable
                 $('#ventilation').DataTable({
+                    'pageLength'    : 100,
                     footerCallback: function(row, data, start, end, display) {
                 var api = this.api();
                 // Remove the formatting to get integer data for summation

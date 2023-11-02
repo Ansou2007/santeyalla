@@ -116,7 +116,7 @@
                 <th width="50%" colspan="2" class="text-end company-data">
                     <span>Vent: #6</span> <br>
                     <span>{{date('d-m-Y')}}</span> <br>
-                    <span>Address: </span> <br>
+                    <span>Adresse: </span> <br>
                 </th>
             </tr>
             <tr class="bg-blue">
@@ -133,8 +133,8 @@
                 <td>{{$ventilation->value('matricule')}}</td>
             </tr>
             <tr>
-                <td>Tracking Id/No.:</td>
-                <td>funda-CRheOqspbA</td>
+                <td>Montant Commision:</td>
+                <td>XXXXXXX</td>
 
                 <td>Prénom:</td>
                 <td>{{$ventilation->value('prenom')}}</td>
@@ -176,6 +176,15 @@
             </tr>
         </thead>
         <tbody>
+            @php
+            $ventile = 0;
+            $non_ventile = 0;
+            $retour = 0;
+            $vendue = 0;
+            $versement = 0;
+            $reliquat = 0;
+            @endphp
+
             @foreach ($ventilation as $ventilation )
             <tr>
                 <td width="5%">{{$loop->index+1}}</td>
@@ -187,14 +196,23 @@
                 <td width="15%" class="fw-bold">{{$ventilation->montant_verse}}</td>
                 <td width="15%" class="fw-bold">{{$ventilation->reliquat}}</td>
             </tr>
+            @php
+            $ventile += $ventilation->ventile;
+            $non_ventile += $ventilation->non_ventile ;
+            $retour += $ventilation->retour;
+            $vendue += $ventilation->qte_vendue;
+            $versement += $ventilation->montant_verse;
+            $reliquat += $ventilation->reliquat;
+            @endphp
             @endforeach
-
             <tr>
-                <td colspan="4" class="total-heading">Total </td>
-                <td colspan="1" class="total-heading">0</td>
-                <td colspan="1" class="total-heading">0</td>
-                <td colspan="1" class="total-heading">0</td>
-                <td colspan="1" class="total-heading">0</td>
+                <td colspan="2" class="total-heading">Total </td>
+                <td colspan="1" class="total-heading">{{$ventile}}</td>
+                <td colspan="1" class="total-heading">{{$non_ventile}}</td>
+                <td colspan="1" class="total-heading">{{$retour}}</td>
+                <td colspan="1" class="total-heading">{{$vendue}}</td>
+                <td colspan="1" class="total-heading">{{$versement}}</td>
+                <td colspan="1" class="total-heading">{{$reliquat}}</td>
 
             </tr>
         </tbody>
